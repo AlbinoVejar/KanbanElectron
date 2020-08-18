@@ -27,7 +27,12 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              {
+                "input": "index.js",
+                "inject": false
+              }
+            ]
           },
           "configurations": {
             "production": {
@@ -35,6 +40,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "index.js",
+                  "width": "index.prod.js"
                 }
               ],
               "optimization": true,

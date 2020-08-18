@@ -13,13 +13,7 @@ const {app, BrowserWindow} = require('electron')
         }
       })
 
-      mainWindow.loadURL(
-        url.format({
-          pathname: path.join(__dirname, `/dist/index.html`),
-          protocol: "file:",
-          slashes: true
-        })
-      );
+      mainWindow.loadURL('http://localhost:4200');
       // Open the DevTools.
       mainWindow.webContents.openDevTools()
 
