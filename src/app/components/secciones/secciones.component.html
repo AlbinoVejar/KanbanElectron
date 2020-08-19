@@ -1,6 +1,23 @@
 <mat-card class="seccion">
-    <mat-card-header class="text-center">Otro titulo</mat-card-header>
-    <button  mat-icon-button aria-label="More Options">
+    <h2 class="textHeader" *ngIf="!showInputName">{{tituloPage}}</h2>
+    <form [formGroup]="mainPage" *ngIf="showInputName">
+        <mat-form-field>
+            <input matInput type="text" formControlName="tituloSeccion" (keyup.enter)="cambiarNombre()" #titulo>
+            <button mat-button *ngIf="titulo.value" matSuffix mat-icon-button aria-label="Clear" (click)="titulo.value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
+    <button mat-icon-button aria-label="More Options" [matMenuTriggerFor]="moreOptionsSeccion">
         <mat-icon>more_vert</mat-icon>
     </button>
 </mat-card>
+
+<!-- Menus -->
+<mat-menu #moreOptionsSeccion="matMenu" xPosition="after">
+    <button mat-menu-item>Nueva Tarjeta</button>
+    <button mat-menu-item (click)="cambiarNombre()" #nombre>Cambiar Nombre</button>
+    <button mat-menu-item>Mover Izquierda</button>
+    <button mat-menu-item>Mover Derecha</button>
+    <button mat-menu-item>Eliminar</button>
+</mat-menu>
