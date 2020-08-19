@@ -1,0 +1,15 @@
+<form [formGroup]="mainForm">
+    <mat-toolbar class="navbar" color="primary">
+        <h1 *ngIf="!selectTableros" (click)="showOptionsTablero()">{{titulo}}</h1>
+        <mat-form-field appearance="fill" *ngIf="selectTableros">
+            <mat-select formControlName="tituloTablero" disableRipple (selectionChange)="cambiarTablero(getTituloTablero)">
+                <mat-option value="Option 1">Option 1</mat-option>
+                <mat-option value="Option 2">Option 2</mat-option>
+                <mat-option value="Option 3">Option 3</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+          <mat-icon>miscellaneous_services</mat-icon>
+        </button>
+    </mat-toolbar>
+</form>
