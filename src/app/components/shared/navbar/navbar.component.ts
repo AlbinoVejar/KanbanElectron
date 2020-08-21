@@ -43,9 +43,14 @@ export class NavbarComponent implements OnInit {
     this.showOptionsTablero();
   }
   // Dialogs
-  openConfig(): void{
-    const dialogConfig = this.dialog(ConfigComponent, {
-      width: '250px'
+  openConfig(data: string): void{
+    const dialogConfig = this.dialog.open(ConfigComponent, {
+      width: '400px',
+      data: {titulo: data}
+    });
+
+    dialogConfig.afterClosed().subscribe((result: any) => {
+      this.titulo = result;
     });
   }
 }

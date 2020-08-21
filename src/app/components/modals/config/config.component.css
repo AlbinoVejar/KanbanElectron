@@ -1,0 +1,42 @@
+.headerModal {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.contentModal {
+    display: flex;
+    margin-top: 5%;
+    flex-direction: row;
+}
+
+.flex {
+    display: flex;
+}
+
+.contentRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.bottomContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.title {
+    font-weight: bold;
+}
+
+h3 {
+    margin-bottom: 0;
+}
+
+h4 {
+    margin-bottom: 0;
+}

@@ -1,0 +1,30 @@
+<div class="pure-g">
+    <div class="pure-u-1 headerModal">
+        <h3 mat-dialog-title>Configuración</h3>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="pure-u-7-8">
+        <mat-divider></mat-divider>
+    </div>
+    <mat-dialog-content class="pure-u-1" [formGroup]="mainPage">
+        <div class="pure-u-1 contentRow">
+            <h4 class="title">Tablero Actual: </h4>
+            <h4 *ngIf="!showEditTitulo">{{tableroActual}}</h4>
+            <mat-form-field *ngIf="showEditTitulo">
+                <mat-label>Nuevo Titulo</mat-label>
+                <input matInput type="text" formControlName="nuevoTitulo" (keyup.enter)="guardarNuevoTitulo()" #newTitle>
+                <button mat-button *ngIf="newTitle.value" matSuffix mat-icon-button aria-label="Clear" (click)="newTitle.value=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <button mat-icon-button (click)="editarTitulo()">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="pure-u-1 bottomContent">
+        <button mat-flat-button color="primary" [mat-dialog-close]="tableroActual">Guardar</button>
+    </mat-dialog-actions>
+</div>
