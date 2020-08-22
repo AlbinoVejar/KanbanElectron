@@ -9,6 +9,7 @@ import { SeccionesComponent } from './components/secciones/secciones.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ConfigComponent } from './components/modals/config/config.component';
+import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ConfigComponent } from './components/modals/config/config.component';
     AppComponent,
     SeccionesComponent,
     NavbarComponent,
-    ConfigComponent
+    ConfigComponent,
+    TarjetasComponent
   ],
   imports: [
     BrowserModule,

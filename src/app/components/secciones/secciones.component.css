@@ -1,10 +1,23 @@
 .seccion {
     margin-left: 3%;
     margin-top: 5%;
+    padding-top: 8px;
+}
+
+.seccionHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 2%;
+}
+
+.seccionFooter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 0;
 }
 
 .textHeader {
@@ -12,4 +25,12 @@
     margin: 0;
     justify-content: center;
     flex-grow: 4;
+}
+
+.margin-null {
+    margin: 0 0 0 0 !important;
+}
+
+.w-100 {
+    width: 100%;
 }

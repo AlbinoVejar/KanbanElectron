@@ -1,21 +1,49 @@
 <mat-card class="seccion">
-    <h2 class="textHeader" *ngIf="!showInputName">{{tituloPage}}</h2>
-    <form [formGroup]="mainPage" *ngIf="showInputName">
-        <mat-form-field>
-            <input matInput type="text" formControlName="tituloSeccion" (keyup.enter)="cambiarNombre()" #titulo>
-            <button mat-button *ngIf="titulo.value" matSuffix mat-icon-button aria-label="Clear" (click)="titulo.value=''">
-              <mat-icon>close</mat-icon>
+    <div class="seccionHeader">
+        <h2 class="textHeader" *ngIf="!showInputName">{{tituloPage}}</h2>
+        <form [formGroup]="mainPage" *ngIf="showInputName">
+            <mat-form-field>
+                <input matInput type="text" formControlName="tituloSeccion" (keyup.enter)="cambiarNombre()" #titulo>
+                <button mat-button *ngIf="titulo.value" matSuffix mat-icon-button aria-label="Clear" (click)="titulo.value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </form>
+        <button mat-icon-button aria-label="More Options" [matMenuTriggerFor]="moreOptionsSeccion">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </div>
+    <mat-divider class="pure-u-1"></mat-divider>
+    <mat-card-content>
+        <app-tarjetas></app-tarjetas>
+    </mat-card-content>
+    <mat-card-actions class="seccionFooter">
+        <div *ngIf="showInputTarjeta">
+            <form [formGroup]="mainPage">
+                <mat-form-field class="w-100">
+                    <mat-label>Nueva Tarjeta</mat-label>
+                    <input matInput type="text" formControlName="tituloTarjeta" (keyup.enter)="guardarTarjeta()" #tarjeta>
+                    <button mat-button *ngIf="tarjeta.value" matSuffix mat-icon-button aria-label="Clear" (click)="tarjeta.value=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </form>
+        </div>
+        <div *ngIf="showInputTarjeta">
+            <button mat-flat-button color="primary" (click)="guardarTarjeta()">
+                Guardar Tarjeta
             </button>
-        </mat-form-field>
-    </form>
-    <button mat-icon-button aria-label="More Options" [matMenuTriggerFor]="moreOptionsSeccion">
-        <mat-icon>more_vert</mat-icon>
-    </button>
+        </div>
+        <button mat-stroked-button (click)="nuevaTarjeta()" *ngIf="!showInputTarjeta">
+            Nueva Tarjeta
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-card-actions>
 </mat-card>
 
 <!-- Menus -->
 <mat-menu #moreOptionsSeccion="matMenu" xPosition="after">
-    <button mat-menu-item>Nueva Tarjeta</button>
+    <button mat-menu-item (click)="nuevaTarjeta()">Nueva Tarjeta</button>
     <button mat-menu-item (click)="cambiarNombre()" #nombre>Cambiar Nombre</button>
     <button mat-menu-item>Mover Izquierda</button>
     <button mat-menu-item>Mover Derecha</button>

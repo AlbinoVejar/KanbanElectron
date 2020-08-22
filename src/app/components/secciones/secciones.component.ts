@@ -9,28 +9,42 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 export class SeccionesComponent implements OnInit {
   mainPage: FormGroup;
   showInputName: boolean;
+  showInputTarjeta: boolean;
   constructor(
     private fb: FormBuilder
   ) {
     this.crearFormulario();
     this.showInputName = false;
+    this.showInputTarjeta = false;
   }
   ngOnInit(): void {
   }
-  crearFormulario(): void{
+  public crearFormulario(): void{
     this.mainPage = this.fb.group({
-      tituloSeccion: ['']
+      tituloSeccion: [''],
+      tituloTarjeta: ['']
     });
+  }
+  private resetForm(): void{
+    this.mainPage.reset();
   }
   get tituloPage(): string{
     return this.mainPage.get('tituloSeccion').value;
   }
-  cambiarNombre(): void{
+  public cambiarNombre(): void{
     this.showInputName = !this.showInputName;
     // console.log(this.tituloPage);
   }
-  guardar(): void{
+  public guardar(): void{
     console.log(this.tituloPage);
     // this.mainPage.reset();
+  }
+  public nuevaTarjeta(): void{
+    this.showInputTarjeta = !this.showInputTarjeta;
+  }
+  public guardarTarjeta(): void{
+    console.log('guardar tarjeta');
+    this.nuevaTarjeta();
+    this.resetForm();
   }
 }
