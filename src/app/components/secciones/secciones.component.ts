@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
+import { MainService } from './../../services/main.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { ElectronService } from 'ngx-electron';
 
 @Component({
   selector: 'app-secciones',
@@ -11,7 +14,11 @@ export class SeccionesComponent implements OnInit {
   showInputName: boolean;
   showInputTarjeta: boolean;
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private mnService: MainService,
+    private eleService: ElectronService,
+    private service: MainService,
+    private httpClient: HttpClient
   ) {
     this.crearFormulario();
     this.showInputName = false;

@@ -10,7 +10,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ConfigComponent } from './components/modals/config/config.component';
 import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
+import { HttpClientModule } from '@angular/common/http';
 
+import { NgxElectronModule } from 'ngx-electron';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
+    NgxElectronModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
