@@ -1,11 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const ipcMain = require('electron').ipcMain;
-// const util = require('util');
 const sqlModule = require('./sql.js');
-// const AsAw = util.promisify(ipcMain.on);
-// const url = require("url");
-// const path = require("path");
-// const http = require('http');
 
 let mainWindow;
 
@@ -40,12 +35,19 @@ app.on('activate', function() {
 });
 
 ipcMain.on('hola', (req, res) => {
+    // sqlModule.buscar()
+    //     .then((data) => {
+    //         console.log(data);
+    //         req.reply('adios', data);
+    //     })
+    //     .catch((err) => {
+    //         console.log('error');
+    //     });
     sqlModule.buscar()
         .then((data) => {
             console.log(data);
-            req.reply('adios', data);
         })
         .catch((err) => {
-            console.log('error');
+            console.error(err);
         });
 });
