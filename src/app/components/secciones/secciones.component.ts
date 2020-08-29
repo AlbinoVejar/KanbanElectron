@@ -17,8 +17,6 @@ export class SeccionesComponent implements OnInit {
     private fb: FormBuilder,
     private mnService: MainService,
     private eleService: ElectronService,
-    private service: MainService,
-    private httpClient: HttpClient
   ) {
     this.crearFormulario();
     this.showInputName = false;

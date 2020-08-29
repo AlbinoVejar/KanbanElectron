@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const ipcMain = require('electron').ipcMain;
 const sqlModule = require('./sql.js');
+const sql = new sqlModule();
 
 let mainWindow;
 
@@ -34,20 +35,45 @@ app.on('activate', function() {
     if (mainWindow === null) createWindow();
 });
 
-ipcMain.on('hola', (req, res) => {
-    // sqlModule.buscar()
+ipcMain.on('getOne', (req, res) => {
+    console.log(res);
+    // sql.getOne(res)
     //     .then((data) => {
-    //         console.log(data);
     //         req.reply('adios', data);
     //     })
     //     .catch((err) => {
-    //         console.log('error');
+    //         req.returnValue('Ocurrió un error');
     //     });
-    sqlModule.buscar()
-        .then((data) => {
-            console.log(data);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+});
+ipcMain.on('getAll', (req, res) => {
+    sql.getAll(res).then((data) => {
+        req.reply('getAll', data);
+        sql.cerrar();
+    }).catch((err) => {
+        req.returnValue('Ocurrió un error');
+    });
+});
+ipcMain.on('insert', (req, res) => {
+    sql.insert(res).then((data) => {
+        req.reply('inserted', data);
+        sql.cerrar();
+    }).catch((err) => {
+        req.returnValue('Ocurrió un error');
+    });
+});
+ipcMain.on('update', (req, res) => {
+    sql.update(res).then((data) => {
+        req.reply('updated', data);
+        sql.cerrar();
+    }).catch((err) => {
+        req.returnValue('Ocurrió un error');
+    });
+});
+ipcMain.on('delete', (req, res) => {
+    sql.delete(res).then((data) => {
+        req.reply('deleted', data);
+        sql.cerrar();
+    }).catch((err) => {
+        req.returnValue('Ocurrió un error');
+    });
 });
