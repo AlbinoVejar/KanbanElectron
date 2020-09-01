@@ -1,0 +1,24 @@
+.inputTarea {
+    margin-left: 2%;
+}
+
+.tarea {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.inputNuevaTarea {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2%;
+    align-items: center;
+}
+
+.nuevaTarea {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+}

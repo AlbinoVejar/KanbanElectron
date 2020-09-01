@@ -1,0 +1,29 @@
+<div class="pure-g">
+    <div class="pure-u-1">
+        <form [formGroup]="tareas">
+            <section class="tarea">
+                <mat-checkbox formControlName="completed" (change)="getCompletado()"></mat-checkbox>
+                <mat-label class="inputTarea" *ngIf="showLabel" (click)="hiddenLabel()">{{getDescripcion}}</mat-label>
+                <mat-form-field *ngIf="!showLabel">
+                    <textarea matInput class="inputTarea" placeholder="Nuevo Elemento" formControlName="descripcion" (keyup.enter)="hiddenLabel()">{{getDescripcion}}</textarea>
+                </mat-form-field>
+            </section>
+        </form>
+        <div class="inputNuevaTarea" *ngIf="nuevaTarea">
+            <mat-form-field class="w-80">
+                <mat-label>Añada una nueva tarea</mat-label>
+                <textarea matInput [formControl]="nuevaDescripcion" #Descripcion>{{nuevaDescripcion.value}}</textarea>
+                <button mat-button *ngIf="Descripcion.value" matSuffix mat-icon-button aria-label="Clear" (click)="Descripcion.value=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <button mat-raised-button color="primary">Añadir</button>
+        </div>
+
+        <section class="nuevaTarea">
+            <button mat-stroked-button (click)="showNuevaTarea()">Nueva Tarea
+                <mat-icon aria-hidden="false" aria-label="Agregar nueva tarea">add</mat-icon>
+            </button>
+        </section>
+    </div>
+</div>

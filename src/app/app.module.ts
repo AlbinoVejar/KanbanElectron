@@ -13,6 +13,8 @@ import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { NgxElectronModule } from 'ngx-electron';
+import { TareasComponent } from './components/tareas/tareas.component';
+import { MainComponent } from './components/modals/main/main.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NgxElectronModule } from 'ngx-electron';
     SeccionesComponent,
     NavbarComponent,
     ConfigComponent,
-    TarjetasComponent
+    TarjetasComponent,
+    TareasComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

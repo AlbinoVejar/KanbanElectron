@@ -1,0 +1,15 @@
+.textCenter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h2 {
+    margin-bottom: 0;
+}
+
+.header-modal {
+    margin-top: 2%;
+    margin-left: 1%;
+}

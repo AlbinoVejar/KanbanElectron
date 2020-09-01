@@ -1,7 +1,14 @@
 .tarjeta {
     margin-top: 8% !important;
+    cursor: pointer;
 }
 
 .margin-null {
     margin: 0 0 0 0 !important;
+}
+
+.textCenter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
