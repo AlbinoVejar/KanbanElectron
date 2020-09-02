@@ -35,45 +35,89 @@ app.on('activate', function() {
     if (mainWindow === null) createWindow();
 });
 
-ipcMain.on('getOne', (req, res) => {
-    console.log(res);
-    // sql.getOne(res)
-    //     .then((data) => {
-    //         req.reply('adios', data);
-    //     })
-    //     .catch((err) => {
-    //         req.returnValue('Ocurrió un error');
-    //     });
-});
-ipcMain.on('getAll', (req, res) => {
-    sql.getAll(res).then((data) => {
-        req.reply('getAll', data);
+ipcMain.handle('getOne', async(event, arg) => {
+    try {
+        const data = await sql.getOne(arg);
         sql.cerrar();
-    }).catch((err) => {
-        req.returnValue('Ocurrió un error');
-    });
+        return data;
+    } catch (error) {
+        event.returnValue = 'Error';
+    }
 });
-ipcMain.on('insert', (req, res) => {
-    sql.insert(res).then((data) => {
-        req.reply('inserted', data);
+ipcMain.handle('getAll', async(event, arg) => {
+    try {
+        const data = await sql.getAll(arg);
         sql.cerrar();
-    }).catch((err) => {
-        req.returnValue('Ocurrió un error');
-    });
+        return data;
+    } catch (error) {
+        event.returnValue = 'Error';
+    }
 });
-ipcMain.on('update', (req, res) => {
-    sql.update(res).then((data) => {
-        req.reply('updated', data);
+ipcMain.handle('insert', async(event, arg) => {
+    try {
+        const data = await sql.insert(arg);
         sql.cerrar();
-    }).catch((err) => {
-        req.returnValue('Ocurrió un error');
-    });
+        return data;
+    } catch (error) {
+        event.returnValue = 'Error';
+    }
 });
-ipcMain.on('delete', (req, res) => {
-    sql.delete(res).then((data) => {
-        req.reply('deleted', data);
+ipcMain.handle('update', async(event, arg) => {
+    try {
+        const data = await sql.update(arg);
         sql.cerrar();
-    }).catch((err) => {
-        req.returnValue('Ocurrió un error');
-    });
+        return data;
+    } catch (error) {
+        event.returnValue = 'Error';
+    }
 });
+ipcMain.handle('delete', async(event, arg) => {
+    try {
+        const data = await sql.delete(arg);
+        sql.cerrar();
+        return data;
+    } catch (error) {
+        event.returnValue = 'Error';
+    }
+});
+// ipcMain.on('getOne', (req, res) => {
+//     sql.getOne(res)
+//         .then((data) => {
+//             req.reply('setOne', data);
+//         })
+//         .catch((err) => {
+//             req.returnValue('Ocurrió un error');
+//         });
+// });
+// ipcMain.on('getAll', (req, res) => {
+//     sql.getAll(res).then((data) => {
+//         req.reply('setAll', data);
+//         sql.cerrar();
+//     }).catch((err) => {
+//         req.returnValue('Ocurrió un error');
+//     });
+// });
+// ipcMain.on('insert', (req, res) => {
+//     sql.insert(res).then((data) => {
+//         req.reply('inserted', data);
+//         sql.cerrar();
+//     }).catch((err) => {
+//         req.returnValue('Ocurrió un error');
+//     });
+// });
+// ipcMain.on('update', (req, res) => {
+//     sql.update(res).then((data) => {
+//         req.reply('updated', data);
+//         sql.cerrar();
+//     }).catch((err) => {
+//         req.returnValue('Ocurrió un error');
+//     });
+// });
+// ipcMain.on('delete', (req, res) => {
+//     sql.delete(res).then((data) => {
+//         req.reply('deleted', data);
+//         sql.cerrar();
+//     }).catch((err) => {
+//         req.returnValue('Ocurrió un error');
+//     });
+// });

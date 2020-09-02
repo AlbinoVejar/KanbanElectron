@@ -4,8 +4,6 @@
         <mat-form-field appearance="fill" *ngIf="selectTableros">
             <mat-select formControlName="tituloTablero" disableRipple (selectionChange)="cambiarTablero(getTituloTablero)">
                 <mat-option value="Option 1">Option 1</mat-option>
-                <mat-option value="Option 2">Option 2</mat-option>
-                <mat-option value="Option 3">Option 3</mat-option>
             </mat-select>
         </mat-form-field>
         <button mat-icon-button aria-label="Example icon-button with menu icon" (click)="openConfig(titulo)">

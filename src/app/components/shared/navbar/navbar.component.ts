@@ -1,3 +1,4 @@
+import { Tablero } from './../../../services/models/Tablero.model';
 import { ConfigComponent } from './../../modals/config/config.component';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -12,6 +13,7 @@ export class NavbarComponent implements OnInit {
   mainForm: FormGroup;
   selectTableros: boolean;
   titulo: string;
+  selectTablero: Tablero;
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog
