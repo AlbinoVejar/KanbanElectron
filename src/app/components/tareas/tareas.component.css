@@ -11,10 +11,13 @@
 
 .inputNuevaTarea {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     margin-top: 2%;
-    align-items: center;
+}
+
+.contentActions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .nuevaTarea {

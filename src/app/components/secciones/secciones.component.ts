@@ -13,6 +13,7 @@ export class SeccionesComponent implements OnInit {
   mainPage: FormGroup;
   showInputName: boolean;
   showInputTarjeta: boolean;
+  showInputNuevaSeccion: boolean;
   constructor(
     private fb: FormBuilder,
     private mnService: MainService,
@@ -21,6 +22,7 @@ export class SeccionesComponent implements OnInit {
     this.crearFormulario();
     this.showInputName = false;
     this.showInputTarjeta = false;
+    this.showInputNuevaSeccion = false;
   }
   ngOnInit(): void {
   }
@@ -48,8 +50,10 @@ export class SeccionesComponent implements OnInit {
     this.showInputTarjeta = !this.showInputTarjeta;
   }
   public guardarTarjeta(): void{
-    console.log('guardar tarjeta');
     this.nuevaTarjeta();
     this.resetForm();
+  }
+  public NuevaSeccion(): void{
+    this.showInputNuevaSeccion = !this.showInputNuevaSeccion;
   }
 }

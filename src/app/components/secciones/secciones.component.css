@@ -1,7 +1,21 @@
 .seccion {
-    margin-left: 3%;
-    margin-top: 5%;
+    margin-left: 2%;
+    margin-top: 2%;
     padding-top: 8px;
+    width: 30%;
+}
+
+.seccionOptions {
+    margin-left: 2%;
+    margin-top: 2%;
+    padding-top: 8px;
+    width: 25%;
+    height: 45%;
+}
+
+.buttonSeccion {
+    margin-left: 2%;
+    margin-top: 2%;
 }
 
 .seccionHeader {
@@ -10,6 +24,12 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2%;
+}
+
+.contentSeccion {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
 .seccionFooter {

@@ -11,11 +11,13 @@ export class TareasComponent implements OnInit {
   tareas: FormGroup;
   nuevaTarea: boolean;
   showLabel: boolean;
+  diasabledButton: boolean;
   constructor(
     private fb: FormBuilder
   ) {
     this.showLabel = true;
     this.nuevaTarea = false;
+    this.diasabledButton = false;
     this.creacionForma();
     this.getCompletado();
   }
@@ -41,5 +43,6 @@ export class TareasComponent implements OnInit {
   }
   public showNuevaTarea(): void{
     this.nuevaTarea = !this.nuevaTarea;
+    this.diasabledButton = !this.diasabledButton;
   }
 }
