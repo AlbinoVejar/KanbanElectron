@@ -25,7 +25,7 @@ function sqlModule() {
         return new Promise((resolve, reject) => {
             db.run(query, (err) => {
                 if (err) return reject(err);
-                resolve('Se guardó con exito');
+                resolve(this.LastId);
             });
         });
     };
@@ -33,7 +33,7 @@ function sqlModule() {
         return new Promise((resolve, reject) => {
             db.run(query, (err) => {
                 if (err) return reject(err);
-                resolve('Se actualizó con exito');
+                resolve(this.changes);
             });
         });
     };
@@ -41,7 +41,7 @@ function sqlModule() {
         return new Promise((resolve, reject) => {
             db.run(query, (err) => {
                 if (err) return reject(err);
-                resolve('Se eliminó con exito');
+                resolve(this.changes);
             });
         });
     };

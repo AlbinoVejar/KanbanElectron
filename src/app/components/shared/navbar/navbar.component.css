@@ -4,3 +4,11 @@
     /* background-color: seashell;
     color: black; */
 }
+
+.selected {
+    cursor: pointer;
+}
+
+.secciones {
+    display: flex;
+}

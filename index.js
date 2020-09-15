@@ -38,7 +38,6 @@ app.on('activate', function() {
 ipcMain.handle('getOne', async(event, arg) => {
     try {
         const data = await sql.getOne(arg);
-        sql.cerrar();
         return data;
     } catch (error) {
         event.returnValue = 'Error';
@@ -47,7 +46,6 @@ ipcMain.handle('getOne', async(event, arg) => {
 ipcMain.handle('getAll', async(event, arg) => {
     try {
         const data = await sql.getAll(arg);
-        sql.cerrar();
         return data;
     } catch (error) {
         event.returnValue = 'Error';
@@ -56,7 +54,6 @@ ipcMain.handle('getAll', async(event, arg) => {
 ipcMain.handle('insert', async(event, arg) => {
     try {
         const data = await sql.insert(arg);
-        sql.cerrar();
         return data;
     } catch (error) {
         event.returnValue = 'Error';
@@ -65,7 +62,6 @@ ipcMain.handle('insert', async(event, arg) => {
 ipcMain.handle('update', async(event, arg) => {
     try {
         const data = await sql.update(arg);
-        sql.cerrar();
         return data;
     } catch (error) {
         event.returnValue = 'Error';
@@ -74,7 +70,6 @@ ipcMain.handle('update', async(event, arg) => {
 ipcMain.handle('delete', async(event, arg) => {
     try {
         const data = await sql.delete(arg);
-        sql.cerrar();
         return data;
     } catch (error) {
         event.returnValue = 'Error';

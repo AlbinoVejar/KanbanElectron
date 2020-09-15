@@ -1,13 +1,18 @@
-<form [formGroup]="mainForm">
-    <mat-toolbar class="navbar" color="primary">
-        <h1 *ngIf="!selectTableros" (click)="showOptionsTablero()">{{titulo}}</h1>
-        <mat-form-field appearance="fill" *ngIf="selectTableros">
-            <mat-select formControlName="tituloTablero" disableRipple (selectionChange)="cambiarTablero(getTituloTablero)">
-                <mat-option value="Option 1">Option 1</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <button mat-icon-button aria-label="Example icon-button with menu icon" (click)="openConfig(titulo)">
-          <mat-icon>miscellaneous_services</mat-icon>
-        </button>
-    </mat-toolbar>
-</form>
+<!-- <form [formGroup]="mainForm">
+
+</form> -->
+<mat-toolbar class="navbar" color="primary">
+    <!-- <h1 class="selected" *ngIf="!selectTableros" (click)="showOptionsTablero()">{{this.service.getSelectTablero.Titulo}}</h1> -->
+    <mat-form-field appearance="fill">
+        <mat-select [value]="selectTablero" disableRipple (selectionChange)="cambiarTablero($event.value)">
+            <mat-option [value]="tablero.IdTablero" *ngFor="let tablero of tableros">{{tablero.Titulo}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-icon-button aria-label="Example icon-button with menu icon" (click)="openConfig(titulo)">
+      <mat-icon>miscellaneous_services</mat-icon>
+    </button>
+</mat-toolbar>
+
+<div class="pure-u-1">
+    <app-secciones class="secciones"></app-secciones>
+</div>

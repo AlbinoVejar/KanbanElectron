@@ -1,6 +1,6 @@
-<mat-card class="seccion">
+<mat-card class="seccion" *ngFor="let seccion of secciones">
     <div class="seccionHeader">
-        <h2 class="textHeader" *ngIf="!showInputName">{{tituloPage}}</h2>
+        <h2 class="textHeader" *ngIf="!showInputName">{{seccion.Titulo}}</h2>
         <form [formGroup]="mainPage" *ngIf="showInputName">
             <mat-form-field>
                 <input matInput type="text" formControlName="tituloSeccion" (keyup.enter)="cambiarNombre()" #titulo>
@@ -43,14 +43,16 @@
 
 <!-- Card para agregar una seccion -->
 <mat-card class="seccionOptions" *ngIf="showInputNuevaSeccion">
-    <mat-form-field class="pure-u-1">
-        <mat-label>Ingresar nombre</mat-label>
-        <input matInput type="text" placeholder="Nueva lista de tareas">
-    </mat-form-field>
-    <mat-card-actions class="seccionFooter">
-        <button mat-flat-button color="primary" class="mr-2">Añadir</button>
-        <button mat-flat-button color="warn" (click)="NuevaSeccion()">Cancelar</button>
-    </mat-card-actions>
+    <form [formGroup]="mainPage">
+        <mat-form-field class="pure-u-1">
+            <mat-label>Ingresar nombre</mat-label>
+            <input matInput type="text" formControlName="tituloSeccion" placeholder="Nueva lista de tareas">
+        </mat-form-field>
+        <mat-card-actions class="seccionFooter">
+            <button mat-flat-button color="primary" class="mr-2" (click)="GuardarNuevaSeccion()">Añadir</button>
+            <button mat-flat-button color="warn">Cancelar</button>
+        </mat-card-actions>
+    </form>
 </mat-card>
 
 <!-- boton agregar Seccion -->
