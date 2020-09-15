@@ -31,6 +31,8 @@ export class SeccionesComponent implements OnInit {
     // this.selectTablero = this;
     this.service.getAllSecciones(1).then((data) => {
       this.secciones = data;
+      console.log(this.secciones);
+      // this.cargarTarjetas().then((data) => {});
       this.selectTablero = this.service.getSelectTablero;
     });
   }
@@ -73,15 +75,15 @@ export class SeccionesComponent implements OnInit {
     this.secciones = [];
     this.service.getAllSecciones(this.selectTablero).then((data) => {
       this.secciones = data;
-      for (const seccion of this.secciones) {
-        this.cargarTarjetas(seccion.IdSeccion).then((data) => {});
-      }
+      this.cargarTarjetas().then((data) => {});
       this.service.setSelectTablero(this.selectTablero);
     });
   }
-  private async cargarTarjetas(idSeccion: number){
-    this.tarjetas = [];
-    const data = await this.service.getAllTarjetas(idSeccion);
-    this.tarjetas = data;
+  private async cargarTarjetas(){
+    const tarjetas = [];
+    for (const seccion of this.secciones) {
+      const data = await this.service.getAllTarjetas(seccion.IdSeccion);
+      seccion.Tarjetas = data;
+    }
   }
 }
