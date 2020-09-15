@@ -9,6 +9,15 @@ h2 {
     margin-bottom: 0;
 }
 
+h3 {
+    margin-bottom: 0;
+}
+
+.content {
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
 .header-modal {
     margin-top: 2%;
     margin-left: 1%;

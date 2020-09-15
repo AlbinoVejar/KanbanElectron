@@ -14,16 +14,15 @@ export class TarjetasComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
   ) {
-    this.titulo = 'Titulo de prueba';
   }
 
   ngOnInit(): void {
   }
-  public hola(): void{
+  public mostrarDialogo(): void{
     this.dialog.open(MainComponent, {
       width: '900px',
       height: '600px',
-      data: {titulo: this.titulo}
+      data: {tarjeta: this.tarjeta}
     });
   }
 

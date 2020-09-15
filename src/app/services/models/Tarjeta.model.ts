@@ -1,3 +1,4 @@
+import { Tarea } from './Tarea.model';
 export class Tarjeta {
     constructor() {}
     public IdTarjeta: number;
@@ -7,5 +8,5 @@ export class Tarjeta {
     public Descripcion?: string;
     public NumTareas?: number;
     public FechaTerminada?: Date;
-    public Tareas?: number[];
+    public Tareas?: Tarea[];
 }

@@ -13,10 +13,12 @@
             <mat-icon>more_vert</mat-icon>
         </button>
     </div>
+
     <mat-divider class="pure-u-1"></mat-divider>
     <mat-card-content>
         <app-tarjetas *ngFor="let tarjeta of seccion.Tarjetas" [tarjeta]="tarjeta"></app-tarjetas>
     </mat-card-content>
+
     <mat-card-actions class="seccionFooter">
         <div *ngIf="showInputTarjeta">
             <form [formGroup]="mainPage">

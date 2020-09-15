@@ -1,14 +1,12 @@
 <div class="pure-g">
     <div class="pure-u-1">
-        <form [formGroup]="tareas">
-            <section class="tarea">
-                <mat-checkbox formControlName="completed" (change)="getCompletado()"></mat-checkbox>
-                <mat-label class="inputTarea" *ngIf="showLabel" (click)="hiddenLabel()">{{getDescripcion}}</mat-label>
-                <mat-form-field *ngIf="!showLabel">
-                    <textarea matInput class="inputTarea" placeholder="Nuevo Elemento" formControlName="descripcion" (keyup.enter)="hiddenLabel()">{{getDescripcion}}</textarea>
-                </mat-form-field>
-            </section>
-        </form>
+        <section class="tarea">
+            <mat-checkbox (change)="getCompletado()" [value]="tarea.Realizada | boolean"></mat-checkbox>
+            <mat-label class="inputTarea" *ngIf="showLabel" (click)="hiddenLabel()">{{tarea.Titulo}}</mat-label>
+            <mat-form-field *ngIf="!showLabel">
+                <textarea matInput class="inputTarea" placeholder="Nuevo Elemento" (keyup.enter)="hiddenLabel()">{{tarea.Titulo}}</textarea>
+            </mat-form-field>
+        </section>
         <div class="inputNuevaTarea" *ngIf="nuevaTarea">
             <mat-form-field class="w-80">
                 <mat-label>Añada una nueva tarea</mat-label>

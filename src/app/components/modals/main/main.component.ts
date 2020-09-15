@@ -1,3 +1,5 @@
+import { MainService } from './../../../services/main.service';
+import { Tarjeta } from './../../../services/models/Tarjeta.model';
 import { TarjetasComponent } from './../../tarjetas/tarjetas.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -8,11 +10,15 @@ import { Component, OnInit, Inject } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  titulo: string;
+  tarjeta: Tarjeta;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: TarjetasComponent
+    @Inject(MAT_DIALOG_DATA) public data: TarjetasComponent,
+    private server: MainService
   ) {
-    this.titulo = data.titulo;
+    this.tarjeta = data.tarjeta;
+    this.server.getAllTareas(this.tarjeta.IdTarjeta).then((data) => {
+      this.tarjeta.Tareas = data;
+    });
   }
 
   ngOnInit(): void {

@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxElectronModule } from 'ngx-electron';
 import { TareasComponent } from './components/tareas/tareas.component';
 import { MainComponent } from './components/modals/main/main.component';
+import { BooleanPipe } from './services/pipes/boolean.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MainComponent } from './components/modals/main/main.component';
     ConfigComponent,
     TarjetasComponent,
     TareasComponent,
-    MainComponent
+    MainComponent,
+    BooleanPipe
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Tarea } from './../../services/models/Tarea.model';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -7,8 +8,9 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./tareas.component.css']
 })
 export class TareasComponent implements OnInit {
+  @Input() tarea: Tarea;
   nuevaDescripcion = new FormControl('');
-  tareas: FormGroup;
+  tareas2: FormGroup;
   nuevaTarea: boolean;
   showLabel: boolean;
   diasabledButton: boolean;
@@ -25,7 +27,7 @@ export class TareasComponent implements OnInit {
   ngOnInit(): void {
   }
   private creacionForma(): void{
-    this.tareas = this.fb.group({
+    this.tareas2 = this.fb.group({
       completed: '',
       descripcion: 'prueba de tareas'
     });
@@ -33,10 +35,10 @@ export class TareasComponent implements OnInit {
 
   // Gets
   public get getDescripcion(): string{
-    return this.tareas.get('descripcion').value;
+    return this.tareas2.get('descripcion').value;
   }
   public getCompletado(): boolean{
-    return this.tareas.get('completed').value;
+    return this.tareas2.get('completed').value;
   }
   public hiddenLabel(): void{
     this.showLabel = !this.showLabel;

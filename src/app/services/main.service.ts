@@ -1,3 +1,4 @@
+import { Tarea } from './models/Tarea.model';
 import { iTarjeta } from './interfaces/iTarjeta';
 import { Tarjeta } from './models/Tarjeta.model';
 import { iTablero } from './interfaces/iTablero';
@@ -78,6 +79,14 @@ export class MainService {
     }
     return tarjetas;
   }
+  public async getAllTareas(idTarjeta: number){
+    const tareas: Tarea[] = [];
+    const items = await this.getTareasSQL(idTarjeta);
+    for (const tarea of items) {
+      tareas.push(Object.assign(new Tarea(), tarea));
+    }
+    return tareas;
+  }
   // Privates
   private getFechaNow(): string{
     return `(SELECT strftime('%d-%m-%Y','now'))`;
@@ -91,22 +100,20 @@ export class MainService {
     // return Object.assign(new Usuario(), data);
   }
   private async getTablerosSQL(idUsuario: number){
-    const query = `SELECT * FROM Tableros WHERE IdUsuario = ${idUsuario}`;
+    const query = `SELECT * FROM Tableros WHERE IdUsuario = ${idUsuario};`;
     return await this.runScript(Sql.GetAll, query);
   }
   private async getSeccionesSQL(idTablero: number){
-    const query = `SELECT * FROM Secciones WHERE IdTablero = ${idTablero}`;
+    const query = `SELECT * FROM Secciones WHERE IdTablero = ${idTablero};`;
     return await this.runScript(Sql.GetAll, query);
   }
   private async getTarjetasSQL(idSeccion: number){
     const query = `SELECT * FROM Tarjetas WHERE IdSeccion = ${idSeccion};`;
-    const data = await this.runScript(Sql.GetAll, query);
-    return data;
+    return await this.runScript(Sql.GetAll, query);
   }
   private async getTareasSQL(idTarjeta: number){
-    const query = `SELECT * FROM Tareas WHERE IdTarjeta = ${idTarjeta}`;
-    const data = await this.runScript(Sql.GetAll, query);
-    console.log(data);
+    const query = `SELECT * FROM Tareas WHERE IdTarjeta = ${idTarjeta};`;
+    return await this.runScript(Sql.GetAll, query);
   }
 
   //public insert
