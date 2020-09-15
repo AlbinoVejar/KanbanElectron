@@ -1,10 +1,9 @@
-import { ControlService } from './../../services/control.service';
+import { Tarjeta } from './../../services/models/Tarjeta.model';
+import { TarjetasComponent } from './../tarjetas/tarjetas.component';
 import { Seccion } from './../../services/models/Seccion.model';
-import { HttpClient } from '@angular/common/http';
 import { MainService } from './../../services/main.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { ElectronService } from 'ngx-electron';
 
 @Component({
   selector: 'app-secciones',
@@ -12,11 +11,14 @@ import { ElectronService } from 'ngx-electron';
   styleUrls: ['./secciones.component.css']
 })
 export class SeccionesComponent implements OnInit {
+  @ViewChild(TarjetasComponent)
+  private tarjetaComponent: TarjetasComponent;
   mainPage: FormGroup;
   showInputName: boolean;
   showInputTarjeta: boolean;
   showInputNuevaSeccion: boolean;
   secciones: Seccion[] = [];
+  tarjetas: Tarjeta[] = [];
   selectTablero: number;
   constructor(
     private fb: FormBuilder,
@@ -71,7 +73,15 @@ export class SeccionesComponent implements OnInit {
     this.secciones = [];
     this.service.getAllSecciones(this.selectTablero).then((data) => {
       this.secciones = data;
+      for (const seccion of this.secciones) {
+        this.cargarTarjetas(seccion.IdSeccion).then((data) => {});
+      }
       this.service.setSelectTablero(this.selectTablero);
     });
+  }
+  private async cargarTarjetas(idSeccion: number){
+    this.tarjetas = [];
+    const data = await this.service.getAllTarjetas(idSeccion);
+    this.tarjetas = data;
   }
 }

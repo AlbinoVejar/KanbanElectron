@@ -15,7 +15,7 @@
     </div>
     <mat-divider class="pure-u-1"></mat-divider>
     <mat-card-content>
-        <app-tarjetas></app-tarjetas>
+        <app-tarjetas *ngFor="let tarjeta of tarjetas" [tarjeta]="tarjeta"></app-tarjetas>
     </mat-card-content>
     <mat-card-actions class="seccionFooter">
         <div *ngIf="showInputTarjeta">

@@ -47,27 +47,10 @@ export class MainService {
   public get getUsuario(): number{
     return this.usuario.IdUsuario;
   }
-  // public cambioTablero(id: number): void{
-  //   this.tableroSeleccionado = this.getTablero(id);
-  //   this.getAllSecciones(this.tableroSeleccionado.IdTablero).then((data) => console.log(this.tableroSeleccionado));
-  // }
-
-  // public async onOpen(){
-  //   await this.getAllUsuario();
-  //   await this.getAllTableros(this.usuario.IdUsuario);
-  //   this.tableroSeleccionado = this.tableros[0];
-  //   // await this.getAllSecciones(this.tableroSeleccionado.IdTablero);
-  // }
   public async getAllUsuario(){
     const data: iUsuario = await this.getUsuarioSQL();
     this.usuario = new Usuario(data.IdUsuario, data.Nombre);
   }
-  // public async getAllTableros(idUsuario: number){
-  //   const data = await this.getTablerosSQL(idUsuario);
-  //   for (const tablero of data) {
-  //     this.tableros.push(Object.assign(new Tablero(), tablero));
-  //   }
-  // }
   public async getAllTableros(idUsuario: number){
     const tableros: Tablero[] = [];
     const data = await this.getTablerosSQL(idUsuario);
@@ -84,13 +67,14 @@ export class MainService {
     }
     return secciones;
   }
-  // public async getAllSecciones(idTablero: number){
-  //   this.secciones = [];
-  //   const data = await this.getSeccionesSQL(idTablero);
-  //   for (const seccion of data) {
-  //     this.secciones.push(Object.assign(new Seccion(), seccion));
-  //   }
-  // }
+  public async getAllTarjetas(idSeccion: number){
+    const tarjetas: Tarjeta[] = [];
+    const data = await this.getTarjetasSQL(idSeccion);
+    for (const tarjeta of data) {
+      tarjetas.push(Object.assign(new Tarjeta(), tarjeta));
+    }
+    return tarjetas;
+  }
   // Privates
   private getFechaNow(): string{
     return `(SELECT strftime('%d-%m-%Y','now'))`;
@@ -113,8 +97,7 @@ export class MainService {
   }
   private async getTarjetasSQL(idSeccion: number){
     const query = `SELECT * FROM Tarjetas WHERE IdSeccion = ${idSeccion}`;
-    const data = await this.runScript(Sql.GetAll, query);
-    console.log(data);
+    return await this.runScript(Sql.GetAll, query);
   }
   private async getTareasSQL(idTarjeta: number){
     const query = `SELECT * FROM Tareas WHERE IdTarjeta = ${idTarjeta}`;
@@ -134,7 +117,6 @@ export class MainService {
     return idTablero;
   }
   public async insertSeccionSQL(titulo: string){
-    console.log(this.tableroSeleccionado);
     const query = `INSERT INTO Secciones(Titulo, IdTablero) VALUES('${titulo}', ${this.tableroSeleccionado});`;
     const idSeccion = await this.runScript(Sql.Insert, query);
     return idSeccion;

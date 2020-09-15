@@ -1,6 +1,7 @@
+import { Tarjeta } from './../../services/models/Tarjeta.model';
 import { MainComponent } from './../modals/main/main.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tarjetas',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tarjetas.component.css']
 })
 export class TarjetasComponent implements OnInit {
+  @Input() tarjeta: Tarjeta;
   titulo: string;
   constructor(
     public dialog: MatDialog,
