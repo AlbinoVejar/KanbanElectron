@@ -1,3 +1,4 @@
+import { MainService } from './../../services/main.service';
 import { Tarea } from './../../services/models/Tarea.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -8,37 +9,40 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./tareas.component.css']
 })
 export class TareasComponent implements OnInit {
-  @Input() tarea: Tarea;
+  @Input() tareas: Tarea[];
+  @Input() idTarjeta: number;
+  form: FormGroup;
   nuevaDescripcion = new FormControl('');
-  tareas2: FormGroup;
   nuevaTarea: boolean;
   showLabel: boolean;
   diasabledButton: boolean;
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private service: MainService
   ) {
     this.showLabel = true;
     this.nuevaTarea = false;
     this.diasabledButton = false;
-    this.creacionForma();
-    this.getCompletado();
+    // this.creacionForma();
   }
 
   ngOnInit(): void {
   }
-  private creacionForma(): void{
-    this.tareas2 = this.fb.group({
-      completed: '',
-      descripcion: 'prueba de tareas'
-    });
-  }
+  // private creacionForma(): void{
+  //   this.form = this.fb.group({
+  //     nuevaDescripcion: ['']
+  //   });
+  // }
 
   // Gets
-  public get getDescripcion(): string{
-    return this.tareas2.get('descripcion').value;
+  public get getTitulo(): string{
+    return this.nuevaDescripcion.value;
   }
+  // public get getDescripcion(): string{
+  //   return this.form.get('nuevaDescripcion').value;
+  // }
   public getCompletado(): boolean{
-    return this.tareas2.get('completed').value;
+    return this.form.get('completed').value;
   }
   public hiddenLabel(): void{
     this.showLabel = !this.showLabel;
@@ -47,4 +51,12 @@ export class TareasComponent implements OnInit {
     this.nuevaTarea = !this.nuevaTarea;
     this.diasabledButton = !this.diasabledButton;
   }
+  public crearTarea($event): void{
+    // console.log(this.getTitulo);
+    $event.preventDefault();
+    this.service.NuevaTarea(this.getTitulo, this.idTarjeta).then((data) => {console.log(data); });
+  }
+  // onEncontrar(){
+  //   this.service.encontrar().then((data) => {console.log(data);});
+  // }
 }

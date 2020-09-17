@@ -17,7 +17,7 @@
     <div class="pure-u-1">
         <h2 mat-dialog-content>Lista de tareas</h2>
         <mat-dialog-content class="content">
-            <app-tareas *ngFor="let tarea of tarjeta.Tareas" [tarea]="tarea"></app-tareas>
+            <app-tareas [tareas]="tarjeta.Tareas" [idTarjeta]="tarjeta.IdTarjeta"></app-tareas>
         </mat-dialog-content>
     </div>
 </div>

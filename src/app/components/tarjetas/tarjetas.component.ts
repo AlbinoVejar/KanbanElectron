@@ -1,7 +1,9 @@
+import { MainService } from './../../services/main.service';
 import { Tarjeta } from './../../services/models/Tarjeta.model';
 import { MainComponent } from './../modals/main/main.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-tarjetas',
@@ -9,20 +11,42 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./tarjetas.component.css']
 })
 export class TarjetasComponent implements OnInit {
-  @Input() tarjeta: Tarjeta;
+  @Input() allTarjetas: Tarjeta[];
+  @Input() idSeccion: number;
+  showInputTarjeta: boolean;
+  mainPage: FormGroup;
   titulo: string;
   constructor(
     public dialog: MatDialog,
+    private fb: FormBuilder,
+    private service: MainService
   ) {
+    this.crearFormulario();
   }
 
   ngOnInit(): void {
   }
-  public mostrarDialogo(): void{
+  private get getTitulo(){
+    return this.mainPage.get('titulo').value;
+  }
+  public crearFormulario(): void{
+    this.mainPage = this.fb.group({
+      titulo: ['']
+    });
+  }
+  public nuevaTarjeta(): void{
+    this.showInputTarjeta = !this.showInputTarjeta;
+  }
+  public guardarTarjeta(): void{
+    this.nuevaTarjeta();
+    this.service.NuevaTarjeta(this.getTitulo, this.idSeccion);
+    // this.resetForm();
+  }
+  public mostrarDialogo(tarjeta: Tarjeta): void{
     this.dialog.open(MainComponent, {
       width: '900px',
       height: '600px',
-      data: {tarjeta: this.tarjeta}
+      data: {tarjeta}
     });
   }
 

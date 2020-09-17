@@ -82,8 +82,10 @@ export class MainService {
   public async getAllTareas(idTarjeta: number){
     const tareas: Tarea[] = [];
     const items = await this.getTareasSQL(idTarjeta);
-    for (const tarea of items) {
-      tareas.push(Object.assign(new Tarea(), tarea));
+    if (items){
+      for (const tarea of items) {
+        tareas.push(Object.assign(new Tarea(), tarea));
+      }
     }
     return tareas;
   }
@@ -121,15 +123,34 @@ export class MainService {
     this.insertTableroSQL(nombre).then( (data) => {
     });
   }
+  public async NuevaSeccion(titulo: string){
+    return await this.insertSeccionSQL(titulo);
+  }
+  public async NuevaTarjeta(titulo: string, idSeccion: number){
+    return await this.insertTarjetaSQL(titulo, idSeccion);
+  }
+  public async NuevaTarea(titulo: string, idTarjeta: number){
+    return await this.insertTareaSQL(titulo, idTarjeta);
+  }
   //INSERT
   private async insertTableroSQL(titulo: string){
     const query = `INSERT INTO Tableros(Titulo, FechaCreacion, IdUsuario) VALUES('${titulo}','${this.getFechaNow}',${this.usuario.IdUsuario})`;
     const idTablero = await this.runScript(Sql.Insert, query);
     return idTablero;
   }
-  public async insertSeccionSQL(titulo: string){
+  private async insertSeccionSQL(titulo: string){
     const query = `INSERT INTO Secciones(Titulo, IdTablero) VALUES('${titulo}', ${this.tableroSeleccionado});`;
     const idSeccion = await this.runScript(Sql.Insert, query);
     return idSeccion;
+  }
+  private async insertTarjetaSQL(titulo: string, idSeccion: number){
+    const query = `INSERT INTO Tarjetas(Titulo, FechaCreacion, IdSeccion) VALUES('${titulo}', ${this.getFechaNow()}, ${idSeccion});`;
+    const idTarjeta = await this.runScript(Sql.Insert, query);
+    return idTarjeta;
+  }
+  private async insertTareaSQL(titulo: string, idTarjeta: number){
+    const query = `INSERT INTO Tareas(Titulo, FechaCreacion, IdTarjeta) VALUES('${titulo}', ${this.getFechaNow()}, ${idTarjeta});`;
+    const idTarea = await this.runScript(Sql.Insert, query);
+    return idTarea;
   }
 }

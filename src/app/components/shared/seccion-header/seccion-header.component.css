@@ -1,0 +1,13 @@
+.textHeader {
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    flex-grow: 4;
+}
+
+.seccionHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,5 +1,28 @@
-<mat-card class="tarjeta" (click)="mostrarDialogo()">
+<mat-card class="tarjeta" (click)="mostrarDialogo(tarjeta)" *ngFor="let tarjeta of allTarjetas">
     <mat-card-content>
         <h3 class="margin-null">{{tarjeta.Titulo}}</h3>
     </mat-card-content>
 </mat-card>
+
+<mat-card-actions class="seccionFooter">
+    <div *ngIf="showInputTarjeta">
+        <form [formGroup]="mainPage">
+            <mat-form-field class="w-100">
+                <mat-label>Nueva Tarjeta</mat-label>
+                <input matInput type="text" formControlName="titulo" (keyup.enter)="guardarTarjeta()" #tarjeta>
+                <button mat-button *ngIf="tarjeta.value" matSuffix mat-icon-button aria-label="Clear" (click)="tarjeta.value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </form>
+    </div>
+    <div *ngIf="showInputTarjeta">
+        <button mat-flat-button color="primary" (click)="guardarTarjeta()">
+            Guardar Tarjeta
+        </button>
+    </div>
+    <button mat-stroked-button (click)="nuevaTarjeta()" *ngIf="!showInputTarjeta">
+        Nueva Tarjeta
+        <mat-icon>add</mat-icon>
+    </button>
+</mat-card-actions>

@@ -12,3 +12,12 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.seccionFooter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}

@@ -12,7 +12,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 export class MainComponent implements OnInit {
   tarjeta: Tarjeta;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: TarjetasComponent,
+    @Inject(MAT_DIALOG_DATA) public data: Tarjeta,
     private server: MainService
   ) {
     this.tarjeta = data.tarjeta;

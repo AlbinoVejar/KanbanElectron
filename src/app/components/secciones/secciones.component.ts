@@ -45,7 +45,7 @@ export class SeccionesComponent implements OnInit {
   private resetForm(): void{
     this.mainPage.reset();
   }
-  get tituloSeccion(): string{
+  get getTituloSeccion(): string{
     return this.mainPage.get('tituloSeccion').value;
   }
   public cambiarNombre(): void{
@@ -66,7 +66,7 @@ export class SeccionesComponent implements OnInit {
     this.showInputNuevaSeccion = !this.showInputNuevaSeccion;
   }
   public GuardarNuevaSeccion(): void{
-    this.service.insertSeccionSQL(this.tituloSeccion);
+    this.service.NuevaSeccion(this.tituloSeccion);
   }
   public cambiarSecciones(id: number){
     this.selectTablero = id;

@@ -48,7 +48,7 @@ ipcMain.handle('getAll', async(event, arg) => {
         const data = await sql.getAll(arg);
         return data;
     } catch (error) {
-        event.returnValue = 'Error';
+        event.sender.send('Error');
     }
 });
 ipcMain.handle('insert', async(event, arg) => {
@@ -56,7 +56,7 @@ ipcMain.handle('insert', async(event, arg) => {
         const data = await sql.insert(arg);
         return data;
     } catch (error) {
-        event.returnValue = 'Error';
+        event.sender.send('Error');
     }
 });
 ipcMain.handle('update', async(event, arg) => {
@@ -83,14 +83,6 @@ ipcMain.handle('delete', async(event, arg) => {
 //         .catch((err) => {
 //             req.returnValue('Ocurrió un error');
 //         });
-// });
-// ipcMain.on('getAll', (req, res) => {
-//     sql.getAll(res).then((data) => {
-//         req.reply('setAll', data);
-//         sql.cerrar();
-//     }).catch((err) => {
-//         req.returnValue('Ocurrió un error');
-//     });
 // });
 // ipcMain.on('insert', (req, res) => {
 //     sql.insert(res).then((data) => {

@@ -39,6 +39,7 @@
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 0;
+    margin-bottom: 0;
 }
 
 .textHeader {

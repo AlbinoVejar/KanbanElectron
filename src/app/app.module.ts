@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { SeccionesComponent } from './components/secciones/secciones.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ConfigComponent } from './components/modals/config/config.component';
 import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
@@ -16,6 +16,7 @@ import { NgxElectronModule } from 'ngx-electron';
 import { TareasComponent } from './components/tareas/tareas.component';
 import { MainComponent } from './components/modals/main/main.component';
 import { BooleanPipe } from './services/pipes/boolean.pipe';
+import { SeccionHeaderComponent } from './components/shared/seccion-header/seccion-header.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BooleanPipe } from './services/pipes/boolean.pipe';
     TarjetasComponent,
     TareasComponent,
     MainComponent,
-    BooleanPipe
+    BooleanPipe,
+    SeccionHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { BooleanPipe } from './services/pipes/boolean.pipe';
     ReactiveFormsModule,
     NgxElectronModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
