@@ -22,6 +22,7 @@ export class TarjetasComponent implements OnInit {
     private service: MainService
   ) {
     this.crearFormulario();
+    this.showInputTarjeta = false;
   }
 
   ngOnInit(): void {
@@ -34,11 +35,15 @@ export class TarjetasComponent implements OnInit {
       titulo: ['']
     });
   }
-  public nuevaTarjeta(): void{
-    this.showInputTarjeta = !this.showInputTarjeta;
+  public nuevaTarjeta(show: boolean): void{
+    if (!this.showInputTarjeta){
+      this.showInputTarjeta = show;
+    }else{
+      this.showInputTarjeta = false;
+    }
   }
   public guardarTarjeta(): void{
-    this.nuevaTarjeta();
+    // this.nuevaTarjeta();
     this.service.NuevaTarjeta(this.getTitulo, this.idSeccion);
     // this.resetForm();
   }

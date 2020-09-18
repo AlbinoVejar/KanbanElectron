@@ -1,6 +1,6 @@
 import { Seccion } from './../../../services/models/Seccion.model';
 import { MainService } from './../../../services/main.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./seccion-header.component.css']
 })
 export class SeccionHeaderComponent implements OnInit {
+  @Output() showNuevaTarjeta = new EventEmitter<boolean>();
   @Input() seccion: Seccion;
   showInputName: boolean;
   form: FormGroup;
@@ -38,6 +39,7 @@ export class SeccionHeaderComponent implements OnInit {
     this.showInputName = !this.showInputName;
   }
   public nuevaTarjeta(): void{
-    // this.showInputTarjeta = !this.showInputTarjeta;
+    console.log('hola');
+    this.showNuevaTarjeta.emit(true);
   }
 }

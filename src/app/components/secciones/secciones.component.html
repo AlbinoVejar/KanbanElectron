@@ -1,6 +1,6 @@
 <mat-card class="seccion" *ngFor="let seccion of secciones; index as i">
     <div>
-        <app-seccion-header [seccion]="seccion"></app-seccion-header>
+        <app-seccion-header (showNuevaTarjeta)="nuevaTarjeta($event)" [seccion]="seccion"></app-seccion-header>
     </div>
 
     <mat-divider class="pure-u-1"></mat-divider>

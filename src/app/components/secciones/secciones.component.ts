@@ -55,18 +55,20 @@ export class SeccionesComponent implements OnInit {
     // console.log(this.tituloSeccion);
     // this.mainPage.reset();
   }
-  public nuevaTarjeta(): void{
-    this.showInputTarjeta = !this.showInputTarjeta;
+  public nuevaTarjeta(show: boolean): void{
+    console.log(show);
+    console.log('hola2');
+    this.tarjetaComponent.nuevaTarjeta(show);
   }
   public guardarTarjeta(): void{
-    this.nuevaTarjeta();
+    // this.nuevaTarjeta();
     this.resetForm();
   }
   public NuevaSeccion(): void{
     this.showInputNuevaSeccion = !this.showInputNuevaSeccion;
   }
   public GuardarNuevaSeccion(): void{
-    this.service.NuevaSeccion(this.tituloSeccion);
+    this.service.NuevaSeccion(this.getTituloSeccion);
   }
   public cambiarSecciones(id: number){
     this.selectTablero = id;
