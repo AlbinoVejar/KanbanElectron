@@ -1,3 +1,5 @@
+import { ConfirmComponent } from './../../modals/confirm/confirm.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Seccion } from './../../../services/models/Seccion.model';
 import { MainService } from './../../../services/main.service';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
@@ -15,7 +17,8 @@ export class SeccionHeaderComponent implements OnInit {
   form: FormGroup;
   constructor(
     private service: MainService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public dialog: MatDialog
   ) {
     this.crearFormulario();
     this.showInputName = false;
@@ -47,12 +50,15 @@ export class SeccionHeaderComponent implements OnInit {
     this.resetForm();
   }
   public eliminarSeccion(): void{
-    const tarjetas = this.seccion.Tarjetas;
-    console.log(tarjetas);
-    // if (tarjetas){
-    //   for (const tarjeta of tarjetas) {
-    //     this.service.ActualizarTarjetaIdSeccion(tarjeta.IdTarjeta, 0);
-    //   }
-    // }
+    const resultDialog = this.dialog.open(ConfirmComponent);
+    resultDialog.afterClosed().subscribe((confirm: boolean) => {
+      if (confirm){
+        const tarjetas = this.seccion.Tarjetas;
+        for (const tarjeta of tarjetas) {
+          this.service.ActualizarTarjetaIdSeccion(tarjeta.IdTarjeta, 0);
+        }
+        this.service.EliminarSeccion(this.seccion.IdSeccion);
+      }
+    });
   }
 }
