@@ -2,13 +2,17 @@
     <h2 class="textHeader" *ngIf="!showInputName">{{seccion.Titulo}}</h2>
     <div *ngIf="showInputName">
         <form [formGroup]="form">
-            <mat-form-field>
+            <mat-form-field class="pb-0">
                 <mat-label>Nuevo nombre</mat-label>
                 <input matInput type="text" formControlName="tituloSeccion" (keyup.enter)="cambiarNombre()" [placeholder]="seccion.Titulo" #titulo>
                 <button mat-button *ngIf="titulo.value" matSuffix mat-icon-button aria-label="Clear" (click)="titulo.value=''">
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-form-field>
+            <div class="seccionButtons">
+                <button mat-flat-button color="primary" (click)="actualizarNombre()">Guardar</button>
+                <button mat-flat-button color="warn" (click)="cambiarNombre()">Cancelar</button>
+            </div>
         </form>
     </div>
     <button mat-icon-button aria-label="More Options" [matMenuTriggerFor]="moreOptionsSeccion">
@@ -17,9 +21,9 @@
 </div>
 <!-- Menus -->
 <mat-menu #moreOptionsSeccion="matMenu" xPosition="after">
-    <button mat-menu-item (click)="nuevaTarjeta()">Nueva Tarjeta</button>
+    <!-- <button mat-menu-item (click)="nuevaTarjeta()">Nueva Tarjeta</button> -->
     <button mat-menu-item (click)="cambiarNombre()" #nombre>Cambiar Nombre</button>
-    <button mat-menu-item>Mover Izquierda</button>
-    <button mat-menu-item>Mover Derecha</button>
+    <!-- <button mat-menu-item>Mover Izquierda</button>
+    <button mat-menu-item>Mover Derecha</button> -->
     <button mat-menu-item>Eliminar</button>
 </mat-menu>

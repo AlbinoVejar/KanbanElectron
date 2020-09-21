@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./seccion-header.component.css']
 })
 export class SeccionHeaderComponent implements OnInit {
-  @Output() showNuevaTarjeta = new EventEmitter<boolean>();
+  @Output() showNuevaTarjeta = new EventEmitter<number>();
   @Input() seccion: Seccion;
   showInputName: boolean;
   form: FormGroup;
@@ -39,7 +39,12 @@ export class SeccionHeaderComponent implements OnInit {
     this.showInputName = !this.showInputName;
   }
   public nuevaTarjeta(): void{
-    console.log('hola');
-    this.showNuevaTarjeta.emit(true);
+    this.showNuevaTarjeta.emit(this.seccion.IdSeccion);
+  }
+  public actualizarNombre(): void{
+    console.log(this.getTituloSeccion);
+    this.service.ActualizarSeccion(this.seccion.IdSeccion, this.getTituloSeccion);
+    this.cambiarNombre();
+    this.resetForm();
   }
 }

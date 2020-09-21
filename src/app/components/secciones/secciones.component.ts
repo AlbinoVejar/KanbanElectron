@@ -17,6 +17,7 @@ export class SeccionesComponent implements OnInit {
   showInputName: boolean;
   showInputTarjeta: boolean;
   showInputNuevaSeccion: boolean;
+  selectSeccion: number;
   secciones: Seccion[] = [];
   tarjetas: Tarjeta[] = [];
   selectTablero: number;
@@ -31,7 +32,7 @@ export class SeccionesComponent implements OnInit {
     // this.selectTablero = this;
     this.service.getAllSecciones(1).then((data) => {
       this.secciones = data;
-      this.selectTablero = this.service.getSelectTablero;
+      this.selectTablero = this.service.tableroSeleccionado;
     });
   }
   ngOnInit(): void {
@@ -55,10 +56,10 @@ export class SeccionesComponent implements OnInit {
     // console.log(this.tituloSeccion);
     // this.mainPage.reset();
   }
-  public nuevaTarjeta(show: boolean): void{
-    console.log(show);
-    console.log('hola2');
-    this.tarjetaComponent.nuevaTarjeta(show);
+  public nuevaTarjeta(select: number): void{
+    this.selectSeccion = select;
+    console.log(this.selectSeccion);
+    this.showInputTarjeta = !this.showInputTarjeta;
   }
   public guardarTarjeta(): void{
     // this.nuevaTarjeta();

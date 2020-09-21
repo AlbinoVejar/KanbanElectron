@@ -1,14 +1,12 @@
+import { ControlService } from './control.service';
 import { Tarea } from './models/Tarea.model';
-import { iTarjeta } from './interfaces/iTarjeta';
 import { Tarjeta } from './models/Tarjeta.model';
-import { iTablero } from './interfaces/iTablero';
 import { iUsuario } from './interfaces/iUsuario';
 import { Seccion } from './models/Seccion.model';
 import { Tablero } from './models/Tablero.model';
 import { Usuario } from './models/Usuario.model';
 import { AllData } from './models/AllData.model';
 import { Injectable } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
 
 enum Sql {
   GetOne = 'getOne',
@@ -26,10 +24,9 @@ export class MainService {
   public usuario: Usuario;
   public tableroSeleccionado: number;
   constructor(
-    private electronS: ElectronService,
+    private service: ControlService
   ){
     this.getAllUsuario().then((data) => {});
-    // this.onOpen();
   }
   private getRenderScript(script): string{
     switch (script) {
@@ -40,30 +37,27 @@ export class MainService {
       case 'delete': return 'deleted';
     }
   }
-  public get getSelectTablero(): number{
-    return this.tableroSeleccionado;
-  }
   public setSelectTablero(idTablero: number): void{
     this.tableroSeleccionado = idTablero;
   }
   public get getUsuario(): number{
     return this.usuario.IdUsuario;
   }
-  public async getAllUsuario(){
-    const data: iUsuario = await this.getUsuarioSQL();
+  public async getAllUsuario(): Promise<any>{
+    const data: iUsuario = await this.service.getUsuarioSQL();
     this.usuario = new Usuario(data.IdUsuario, data.Nombre);
   }
-  public async getAllTableros(idUsuario: number){
+  public async getAllTableros(idUsuario: number): Promise<any>{
     const tableros: Tablero[] = [];
-    const data = await this.getTablerosSQL(idUsuario);
+    const data = await this.service.getTablerosSQL(idUsuario);
     for (const tablero of data) {
       tableros.push(Object.assign(new Tablero(), tablero));
     }
     return tableros;
   }
-  public async getAllSecciones(idTablero: number){
+  public async getAllSecciones(idTablero: number): Promise<any>{
     const secciones: Seccion[] = [];
-    const data = await this.getSeccionesSQL(idTablero);
+    const data = await this.service.getSeccionesSQL(idTablero);
     for (const seccion of data) {
       const item: Seccion = Object.assign(new Seccion(), seccion);
       item.Tarjetas = await this.getAllTarjetas(item.IdSeccion);
@@ -71,17 +65,17 @@ export class MainService {
     }
     return secciones;
   }
-  public async getAllTarjetas(idSeccion: number){
+  public async getAllTarjetas(idSeccion: number): Promise<any>{
     const tarjetas: Tarjeta[] = [];
-    const items = await this.getTarjetasSQL(idSeccion);
+    const items = await this.service.getTarjetasSQL(idSeccion);
     for (const tarjeta of items) {
       tarjetas.push(Object.assign(new Tarjeta(), tarjeta));
     }
     return tarjetas;
   }
-  public async getAllTareas(idTarjeta: number){
+  public async getAllTareas(idTarjeta: number): Promise<any>{
     const tareas: Tarea[] = [];
-    const items = await this.getTareasSQL(idTarjeta);
+    const items = await this.service.getTareasSQL(idTarjeta);
     if (items){
       for (const tarea of items) {
         tareas.push(Object.assign(new Tarea(), tarea));
@@ -89,68 +83,56 @@ export class MainService {
     }
     return tareas;
   }
-  // Privates
-  private getFechaNow(): string{
-    return `(SELECT strftime('%d-%m-%Y','now'))`;
-  }
-  private async runScript(script: string, query: string){
-    return await this.electronS.ipcRenderer.invoke(script, query);
-  }
-  private async getUsuarioSQL(){
-    const query = 'SELECT * FROM Usuarios;';
-    return await this.runScript(Sql.GetOne, query);
-    // return Object.assign(new Usuario(), data);
-  }
-  private async getTablerosSQL(idUsuario: number){
-    const query = `SELECT * FROM Tableros WHERE IdUsuario = ${idUsuario};`;
-    return await this.runScript(Sql.GetAll, query);
-  }
-  private async getSeccionesSQL(idTablero: number){
-    const query = `SELECT * FROM Secciones WHERE IdTablero = ${idTablero};`;
-    return await this.runScript(Sql.GetAll, query);
-  }
-  private async getTarjetasSQL(idSeccion: number){
-    const query = `SELECT * FROM Tarjetas WHERE IdSeccion = ${idSeccion};`;
-    return await this.runScript(Sql.GetAll, query);
-  }
-  private async getTareasSQL(idTarjeta: number){
-    const query = `SELECT * FROM Tareas WHERE IdTarjeta = ${idTarjeta};`;
-    return await this.runScript(Sql.GetAll, query);
-  }
 
-  //public insert
-  public NuevoTablero(nombre: string): any{
-    this.insertTableroSQL(nombre).then( (data) => {
-    });
+  // public insert
+  public async NuevoTablero(nombre: string): Promise<any>{
+    return await this.service.insertTableroSQL(nombre, this.tableroSeleccionado  );
   }
-  public async NuevaSeccion(titulo: string){
-    return await this.insertSeccionSQL(titulo);
+  public async NuevaSeccion(titulo: string): Promise<any>{
+    return await this.service.insertSeccionSQL(titulo, this.tableroSeleccionado);
   }
-  public async NuevaTarjeta(titulo: string, idSeccion: number){
-    return await this.insertTarjetaSQL(titulo, idSeccion);
+  public async NuevaTarjeta(titulo: string, idSeccion: number): Promise<any>{
+    return await this.service.insertTarjetaSQL(titulo, idSeccion);
   }
-  public async NuevaTarea(titulo: string, idTarjeta: number){
-    return await this.insertTareaSQL(titulo, idTarjeta);
+  public async NuevaTarea(titulo: string, idTarjeta: number): Promise<any>{
+    return await this.service.insertTareaSQL(titulo, idTarjeta);
   }
-  //INSERT
-  private async insertTableroSQL(titulo: string){
-    const query = `INSERT INTO Tableros(Titulo, FechaCreacion, IdUsuario) VALUES('${titulo}','${this.getFechaNow}',${this.usuario.IdUsuario})`;
-    const idTablero = await this.runScript(Sql.Insert, query);
-    return idTablero;
+  // public update
+  public async ActualizarTablero(idTablero: number, titulo: string): Promise<any>{
+    return await this.service.updateTableroSQL(idTablero, titulo);
   }
-  private async insertSeccionSQL(titulo: string){
-    const query = `INSERT INTO Secciones(Titulo, IdTablero) VALUES('${titulo}', ${this.tableroSeleccionado});`;
-    const idSeccion = await this.runScript(Sql.Insert, query);
-    return idSeccion;
+  public async ActualizarSeccion(idSeccion: number, titulo: string): Promise<any>{
+    return await this.service.updateSeccionSQL(idSeccion, titulo);
   }
-  private async insertTarjetaSQL(titulo: string, idSeccion: number){
-    const query = `INSERT INTO Tarjetas(Titulo, FechaCreacion, IdSeccion) VALUES('${titulo}', ${this.getFechaNow()}, ${idSeccion});`;
-    const idTarjeta = await this.runScript(Sql.Insert, query);
-    return idTarjeta;
+  public async ActualizarTarjetaAllParams(idTarjeta: number, titulo: string, descripcion: string, idSeccion: number): Promise<any>{
+    return await this.service.updateTarjetaAllParamsSQL(idTarjeta, titulo, descripcion, idSeccion);
   }
-  private async insertTareaSQL(titulo: string, idTarjeta: number){
-    const query = `INSERT INTO Tareas(Titulo, FechaCreacion, IdTarjeta) VALUES('${titulo}', ${this.getFechaNow()}, ${idTarjeta});`;
-    const idTarea = await this.runScript(Sql.Insert, query);
-    return idTarea;
+  public async ActualizarTarjetaDescripcion(idTarjeta: number, descripcion: string): Promise<any>{
+    return await this.service.updateTarjetaDescripcionSQL(idTarjeta, descripcion);
+  }
+  public async ActualizarTarjetaTitulo(idTarjeta: number, titulo: string): Promise<any>{
+    return await this.service.updateTarjetaTituloSQL(idTarjeta, titulo);
+  }
+  public async ActualizarTarjetaIdSeccion(idTarjeta: number, idSeccion: number): Promise<any>{
+    return await this.service.updateTarjetaIdSeccionSQL(idTarjeta, idSeccion);
+  }
+  public async ActualizarTareaCheck(idTarea: number, check: number): Promise<any>{
+    return await this.service.updateTareaCheckSQL(idTarea, check);
+  }
+  public async ActualizarTareaTitulo(idTarea: number, titulo: string): Promise<any>{
+    return await this.service.updateTareaTituloSQL(idTarea, titulo);
+  }
+  // public DELETE
+  public async EliminarTablero(idTablero: number): Promise<any>{
+    return await this.service.deleteTableroSQL(idTablero);
+  }
+  public async EliminarSeccion(idSeccion: number): Promise<any>{
+    return await this.service.deleteSeccionSQL(idSeccion);
+  }
+  public async EliminarTarjeta(idTarjeta: number): Promise<any>{
+    return await this.service.deleteTarjetaSQL(idTarjeta);
+  }
+  public async EliminarTarea(idTarea: number): Promise<any>{
+    return await this.service.deleteTareaSQL(idTarea);
   }
 }
