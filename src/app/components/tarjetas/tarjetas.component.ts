@@ -1,3 +1,4 @@
+import { ConfirmComponent } from './../modals/confirm/confirm.component';
 import { MainService } from './../../services/main.service';
 import { Tarjeta } from './../../services/models/Tarjeta.model';
 import { MainComponent } from './../modals/main/main.component';
@@ -16,11 +17,13 @@ export class TarjetasComponent implements OnInit {
   showInputTarjeta: boolean;
   mainPage: FormGroup;
   titulo: string;
+  selectTarjeta: number;
   constructor(
     public dialog: MatDialog,
     private fb: FormBuilder,
     private service: MainService
   ) {
+    this.selectTarjeta = 0;
     this.crearFormulario();
     this.showInputTarjeta = false;
   }
@@ -47,12 +50,18 @@ export class TarjetasComponent implements OnInit {
     this.service.NuevaTarjeta(this.getTitulo, this.idSeccion);
     // this.resetForm();
   }
+  public eliminarTarjeta(id: number): void{
+    // this.service.EliminarTarjeta(id);
+  }
   public mostrarDialogo(tarjeta: Tarjeta): void{
     this.dialog.open(MainComponent, {
       width: '900px',
       height: '600px',
       data: {tarjeta}
     });
+  }
+  public mostrarConfirmacion(id: number): void{
+    this.dialog.open(ConfirmComponent, {data: id});
   }
 
 }

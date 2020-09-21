@@ -17,6 +17,7 @@ import { TareasComponent } from './components/tareas/tareas.component';
 import { MainComponent } from './components/modals/main/main.component';
 import { BooleanPipe } from './services/pipes/boolean.pipe';
 import { SeccionHeaderComponent } from './components/shared/seccion-header/seccion-header.component';
+import { ConfirmComponent } from './components/modals/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SeccionHeaderComponent } from './components/shared/seccion-header/secci
     TareasComponent,
     MainComponent,
     BooleanPipe,
-    SeccionHeaderComponent
+    SeccionHeaderComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,

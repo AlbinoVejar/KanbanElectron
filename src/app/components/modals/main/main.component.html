@@ -11,13 +11,31 @@
     <div class="pure-u-1">
         <h2 mat-dialog-content>Descripción</h2>
         <mat-dialog-content class="content">
-            <p>{{tarjeta.Descripcion}}</p>
+            <h3>{{tarjeta.Descripcion}}</h3>
         </mat-dialog-content>
     </div>
     <div class="pure-u-1">
         <h2 mat-dialog-content>Lista de tareas</h2>
         <mat-dialog-content class="content">
-            <app-tareas [tareas]="tarjeta.Tareas" [idTarjeta]="tarjeta.IdTarjeta"></app-tareas>
+            <app-tareas *ngFor="let tarea of this.tarjeta.Tareas" [tarea]="tarea" [idTarjeta]="tarjeta.IdTarjeta"></app-tareas>
         </mat-dialog-content>
+        <!-- <div class="inputNuevaTarea" *ngIf="nuevaTarea">
+            <mat-form-field class="w-80">
+                <mat-label>Añada una nueva tarea</mat-label>
+                <textarea matInput [formControl]="nuevaDescripcion" #Descripcion>{{Descripcion.value}}</textarea>
+                <button type="button" mat-button *ngIf="Descripcion.value" matSuffix mat-icon-button aria-label="Clear" (click)="Descripcion.value=''">
+                          <mat-icon>close</mat-icon>
+                        </button>
+            </mat-form-field>
+        </div>
+        <div class="pure-u-1-3 contentActions" *ngIf="nuevaTarea">
+            <button type="button" mat-raised-button color="primary" class="mr-2" (click)="crearTarea($event)">Añadir</button>
+            <button mat-raised-button color="warn" (click)="showNuevaTarea()">Cancelar</button>
+        </div>
+        <section class="nuevaTarea">
+            <button mat-stroked-button (click)="showNuevaTarea()" [disabled]="diasabledButton">Nueva Tarea
+                <mat-icon aria-hidden="false" aria-label="Agregar nueva tarea">add</mat-icon>
+            </button>
+        </section> -->
     </div>
 </div>

@@ -1,5 +1,15 @@
-<mat-card class="tarjeta" (click)="mostrarDialogo(tarjeta)" *ngFor="let tarjeta of allTarjetas">
-    <mat-card-content>
-        <h3 class="margin-null">{{tarjeta.Titulo}}</h3>
+<mat-card class="tarjeta" *ngFor="let tarjeta of allTarjetas">
+    <mat-card-content class="headerTarjeta">
+        <h3 class="margin-null" (click)="mostrarDialogo(tarjeta)">{{tarjeta.Titulo}}</h3>
+        <button mat-icon-button [matMenuTriggerFor]="menuTarjeta" aria-label="Example icon-button with a menu" (click)="selectTarjeta = tarjeta.IdTarjeta">
+            <mat-icon>more_vert</mat-icon>
+        </button>
     </mat-card-content>
 </mat-card>
+
+<mat-menu #menuTarjeta="matMenu" xPosition="after">
+    <button mat-menu-item (click)="mostrarConfirmacion(selectTarjeta)">
+        Eliminar
+        <mat-icon >delete</mat-icon>
+    </button>
+</mat-menu>

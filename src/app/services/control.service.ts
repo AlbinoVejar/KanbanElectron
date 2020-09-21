@@ -107,19 +107,19 @@ export class ControlService {
   }
   // DELETE
   public async deleteTableroSQL(idTablero: number): Promise<any>{
-    const query = `DELETE Tableros WHERE IdTablero = ${idTablero};`;
+    const query = `DELETE FROM Tableros WHERE IdTablero = ${idTablero};`;
     return await this.runScript(Sql.Delete, query);
   }
   public async deleteSeccionSQL(idSeccion: number): Promise<any>{
-    const query = `DELETE Secciones WHERE IdSeccion = ${idSeccion};`;
+    const query = `DELETE FROM Secciones WHERE IdSeccion = ${idSeccion};`;
     return await this.runScript(Sql.Delete, query);
   }
   public async deleteTarjetaSQL(idTarjeta: number): Promise<any>{
-    const query = `DELETE Tarjetas WHERE IdTarjeta = ${idTarjeta};`;
+    const query = `DELETE FROM Tarjetas WHERE IdTarjeta = ${idTarjeta};`;
     return await this.runScript(Sql.Delete, query);
   }
   public async deleteTareaSQL(idTarea: number): Promise<any>{
-    const query = `DELETE Tareas WHERE IdTarea = ${idTarea};`;
+    const query = `DELETE FROM Tareas WHERE IdTarea = ${idTarea};`;
     return await this.runScript(Sql.Delete, query);
   }
 }

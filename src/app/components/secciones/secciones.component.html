@@ -8,7 +8,7 @@
         <app-tarjetas [allTarjetas]="seccion.Tarjetas" [idSeccion]="seccion.IdSeccion"></app-tarjetas>
     </mat-card-content>
     <mat-card-actions class="seccionFooter">
-        <div *ngIf="showInputTarjeta || (showInputTarjeta  && seccion.IdSeccion === selectSeccion)" #divTarjeta>
+        <div *ngIf="showInputTarjeta" #divTarjeta>
             <form [formGroup]="mainPage">
                 <mat-form-field class="w-100">
                     <mat-label>Nueva Tarjeta</mat-label>

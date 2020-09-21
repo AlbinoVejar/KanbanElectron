@@ -1,5 +1,5 @@
 <div class="seccionHeader">
-    <h2 class="textHeader" *ngIf="!showInputName">{{seccion.Titulo}}</h2>
+    <h2 class="textHeader" *ngIf="!showInputName" (click)="cambiarNombre()">{{seccion.Titulo}}</h2>
     <div *ngIf="showInputName">
         <form [formGroup]="form">
             <mat-form-field class="pb-0">

@@ -21,3 +21,10 @@
     padding-bottom: 0;
     margin-bottom: 0;
 }
+
+.headerTarjeta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

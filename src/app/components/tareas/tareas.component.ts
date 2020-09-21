@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./tareas.component.css']
 })
 export class TareasComponent implements OnInit {
-  @Input() tareas: Tarea[];
+  @Input() tarea: Tarea;
   @Input() idTarjeta: number;
   form: FormGroup;
   nuevaDescripcion = new FormControl('');
@@ -50,6 +50,10 @@ export class TareasComponent implements OnInit {
   public showNuevaTarea(): void{
     this.nuevaTarea = !this.nuevaTarea;
     this.diasabledButton = !this.diasabledButton;
+  }
+  public eliminarTarea(): void{
+    this.service.EliminarTarea(this.tarea.IdTarea);
+    console.log('Eliminado con exito');
   }
   public crearTarea($event): void{
     // console.log(this.getTitulo);
