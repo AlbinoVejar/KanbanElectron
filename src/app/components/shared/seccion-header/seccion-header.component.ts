@@ -42,9 +42,17 @@ export class SeccionHeaderComponent implements OnInit {
     this.showNuevaTarjeta.emit(this.seccion.IdSeccion);
   }
   public actualizarNombre(): void{
-    console.log(this.getTituloSeccion);
     this.service.ActualizarSeccion(this.seccion.IdSeccion, this.getTituloSeccion);
     this.cambiarNombre();
     this.resetForm();
+  }
+  public eliminarSeccion(): void{
+    const tarjetas = this.seccion.Tarjetas;
+    console.log(tarjetas);
+    // if (tarjetas){
+    //   for (const tarjeta of tarjetas) {
+    //     this.service.ActualizarTarjetaIdSeccion(tarjeta.IdTarjeta, 0);
+    //   }
+    // }
   }
 }

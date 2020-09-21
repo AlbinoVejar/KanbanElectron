@@ -15,7 +15,7 @@ export class MainComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Tarjeta,
     private server: MainService
   ) {
-    this.tarjeta = data.tarjeta;
+    this.tarjeta = data;
     this.server.getAllTareas(this.tarjeta.IdTarjeta).then((data) => {
       this.tarjeta.Tareas = data;
     });

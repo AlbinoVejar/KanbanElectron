@@ -57,7 +57,7 @@ export class TarjetasComponent implements OnInit {
     this.dialog.open(MainComponent, {
       width: '900px',
       height: '600px',
-      data: {tarjeta}
+      data: tarjeta
     });
   }
   public mostrarConfirmacion(id: number): void{
