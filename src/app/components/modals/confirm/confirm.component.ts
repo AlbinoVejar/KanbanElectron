@@ -11,16 +11,8 @@ export class ConfirmComponent implements OnInit {
   id: number;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: number,
-    public dialog: MatDialogRef<ConfirmComponent>,
-    private server: MainService
-  ) {
-    this.id = data;
-  }
+  ) {}
 
   ngOnInit(): void {
-  }
-  public eliminarTarjeta(): void{
-    this.server.EliminarTarjeta(this.id);
-    this.dialog.close();
   }
 }
