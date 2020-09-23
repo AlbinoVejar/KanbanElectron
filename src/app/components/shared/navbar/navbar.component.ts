@@ -31,6 +31,7 @@ export class NavbarComponent implements OnInit {
     // this.selectTablero = this.service.getSelectTablero;
     this.getTableros().then((data) => {
       this.selectTablero = this.tableros[0].IdTablero;
+      this.titulo = this.tableros[0].Titulo;
       this.service.setSelectTablero(this.selectTablero);
     });
     this.selectTableros = false;
@@ -54,6 +55,7 @@ export class NavbarComponent implements OnInit {
   }
   cambiarTablero(selected: string): void{
     if (selected){
+      this.titulo = this.tableros[selected].Titulo;
       this.selectTablero = Number(selected);
       this.service.setSelectTablero(this.selectTablero);
       this.seccionesComponent.cambiarSecciones(this.selectTablero);
@@ -63,7 +65,7 @@ export class NavbarComponent implements OnInit {
   openConfig(data: string): void{
     const dialogConfig = this.dialog.open(ConfigComponent, {
       width: '400px',
-      data: {titulo: data}
+      data: {titulo: this.titulo, idTablero: this.selectTablero}
     });
 
     dialogConfig.afterClosed().subscribe((result: any) => {

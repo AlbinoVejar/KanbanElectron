@@ -1,3 +1,4 @@
+import { MainService } from './../../../services/main.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -9,16 +10,19 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./config.component.css']
 })
 export class ConfigComponent implements OnInit {
-  tableroActual: string;
+  tableroActual: number;
+  tableroTitulo: string;
   showEditTitulo: boolean;
   mainPage: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<ConfigComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private service: MainService
   ) {
     this.showEditTitulo = false;
-    this.tableroActual = data.titulo;
+    this.tableroActual = Number(data.idTablero);
+    this.tableroTitulo = data.titulo;
     this.crearForma();
   }
   ngOnInit(): void {
@@ -28,16 +32,20 @@ export class ConfigComponent implements OnInit {
   }
   private crearForma(): void{
     this.mainPage = this.fb.group({
-      nuevoTitulo: this.tableroActual
+      nuevoTitulo: this.tableroTitulo
     });
   }
   public guardarDatos(): void{
-    console.log('Guardar Datos');
+    if (this.mainPage.get('nuevoTitulo').untouched){
+      console.log(this.getTituloFromPage);
+      this.service.ActualizarTablero(this.tableroActual, this.getTituloFromPage);
+    }
+    this.dialogRef.close();
     // this.tableroActual = this.getTituloFromPage;
   }
   public guardarNuevoTitulo(): void{
     this.showEditTitulo = false;
-    this.tableroActual = this.getTituloFromPage;
+    this.tableroTitulo = this.getTituloFromPage;
   }
   public editarTitulo(): void{
     this.showEditTitulo = true;

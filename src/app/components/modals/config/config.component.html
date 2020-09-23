@@ -11,7 +11,7 @@
     <mat-dialog-content class="pure-u-1" [formGroup]="mainPage">
         <div class="pure-u-1 contentRow">
             <h4 class="title">Tablero Actual: </h4>
-            <h4 *ngIf="!showEditTitulo">{{tableroActual}}</h4>
+            <h4 *ngIf="!showEditTitulo">{{tableroTitulo}}</h4>
             <mat-form-field *ngIf="showEditTitulo">
                 <mat-label>Nuevo Titulo</mat-label>
                 <input matInput type="text" formControlName="nuevoTitulo" (keyup.enter)="guardarNuevoTitulo()" #newTitle>
@@ -23,8 +23,14 @@
                 <mat-icon>edit</mat-icon>
             </button>
         </div>
+        <div class="contentRow">
+            <button mat-flat-button color="primary">
+                Eliminar Tablero
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
     </mat-dialog-content>
     <mat-dialog-actions class="pure-u-1 bottomContent">
-        <button mat-flat-button color="primary" [mat-dialog-close]="tableroActual">Guardar</button>
+        <button mat-flat-button color="primary" (click)="guardarDatos()">Guardar</button>
     </mat-dialog-actions>
 </div>
