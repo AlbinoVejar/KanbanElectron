@@ -5,8 +5,9 @@
 
     <mat-divider class="pure-u-1"></mat-divider>
     <mat-card-content>
-        <app-tarjetas [allTarjetas]="seccion.Tarjetas" [idSeccion]="seccion.IdSeccion"></app-tarjetas>
+        <app-tarjetas *ngFor="let tarjeta of seccion.Tarjetas" [tarjeta]="tarjeta" [idSeccion]="seccion.IdSeccion"></app-tarjetas>
     </mat-card-content>
+    <!-- Botón para agregar nueva tarjeta -->
     <mat-card-actions class="seccionFooter">
         <div *ngIf="showInputTarjeta" #divTarjeta>
             <form [formGroup]="mainPage">

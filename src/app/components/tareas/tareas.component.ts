@@ -11,38 +11,33 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 export class TareasComponent implements OnInit {
   @Input() tarea: Tarea;
   @Input() idTarjeta: number;
-  form: FormGroup;
   nuevaDescripcion = new FormControl('');
+  completed = new FormControl('');
   nuevaTarea: boolean;
   showLabel: boolean;
   diasabledButton: boolean;
   constructor(
-    private fb: FormBuilder,
     private service: MainService
   ) {
     this.showLabel = true;
     this.nuevaTarea = false;
     this.diasabledButton = false;
-    // this.creacionForma();
+    this.completed.setValue(this.tarea.Realizada);
   }
 
   ngOnInit(): void {
   }
-  // private creacionForma(): void{
-  //   this.form = this.fb.group({
-  //     nuevaDescripcion: ['']
-  //   });
-  // }
 
   // Gets
   public get getTitulo(): string{
     return this.nuevaDescripcion.value;
   }
-  // public get getDescripcion(): string{
-  //   return this.form.get('nuevaDescripcion').value;
-  // }
-  public getCompletado(): boolean{
-    return this.form.get('completed').value;
+  public getCompletado(): number{
+    if (this.completed.value === true){
+      return 1;
+    }else {
+      return 0;
+    }
   }
   public hiddenLabel(): void{
     this.showLabel = !this.showLabel;
@@ -53,14 +48,15 @@ export class TareasComponent implements OnInit {
   }
   public eliminarTarea(): void{
     this.service.EliminarTarea(this.tarea.IdTarea);
-    console.log('Eliminado con exito');
   }
   public crearTarea($event): void{
-    // console.log(this.getTitulo);
     $event.preventDefault();
     this.service.NuevaTarea(this.getTitulo, this.idTarjeta).then((data) => {console.log(data); });
   }
-  // onEncontrar(){
-  //   this.service.encontrar().then((data) => {console.log(data);});
-  // }
+  public actualizarTarea(): void{
+    this.service.ActualizarTareaTitulo(this.tarea.IdTarea, this.getTitulo);
+  }
+  public actualizarEstadoTarea(): void{
+    this.service.ActualizarTareaCheck(this.tarea.IdTarea, this.getCompletado());
+  }
 }

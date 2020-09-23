@@ -2,15 +2,15 @@
     <div class="pure-u-1">
         <section class="tarea">
             <div class="contentTarea">
-                <mat-checkbox (change)="getCompletado()" [value]="tarea.Realizada | boolean"></mat-checkbox>
+                <mat-checkbox (change)="actualizarEstadoTarea()" [formControl]="completed" value="this.tarea.Realizada"></mat-checkbox>
                 <mat-label class="inputTarea" *ngIf="showLabel" (click)="hiddenLabel()">{{tarea.Titulo}}</mat-label>
                 <mat-form-field *ngIf="!showLabel">
-                    <textarea matInput class="inputTarea" placeholder="Nuevo Elemento" (keyup.enter)="hiddenLabel()">{{tarea.Titulo}}</textarea>
+                    <textarea matInput [formControl]="nuevaDescripcion" class="inputTarea" placeholder="Nuevo Elemento" (keyup.enter)="actualizarTarea()">{{tarea.Titulo}}</textarea>
                 </mat-form-field>
             </div>
             <div class="options">
                 <button mat-icon-button>
-                    <mat-icon>create</mat-icon>
+                    <mat-icon (click)="hiddenLabel()">create</mat-icon>
                 </button>
                 <button mat-icon-button>
                     <mat-icon (click)="eliminarTarea()">delete</mat-icon>

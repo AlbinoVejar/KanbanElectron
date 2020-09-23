@@ -1,6 +1,10 @@
 .tarjeta {
     margin-top: 8% !important;
     cursor: pointer;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-left: 4%;
+    padding-right: 1%;
 }
 
 .margin-null {
@@ -11,6 +15,12 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.itemsCenter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .seccionFooter {

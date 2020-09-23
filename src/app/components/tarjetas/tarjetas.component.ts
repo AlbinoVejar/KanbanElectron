@@ -4,7 +4,7 @@ import { Tarjeta } from './../../services/models/Tarjeta.model';
 import { MainComponent } from './../modals/main/main.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-tarjetas',
@@ -12,10 +12,11 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./tarjetas.component.css']
 })
 export class TarjetasComponent implements OnInit {
-  @Input() allTarjetas: Tarjeta[];
+  @Input() tarjeta: Tarjeta;
   @Input() idSeccion: number;
   showInputTarjeta: boolean;
   mainPage: FormGroup;
+  tituloNuevo = new FormControl('');
   titulo: string;
   selectTarjeta: number;
   constructor(
@@ -24,34 +25,24 @@ export class TarjetasComponent implements OnInit {
     private service: MainService
   ) {
     this.selectTarjeta = 0;
-    this.crearFormulario();
     this.showInputTarjeta = false;
   }
 
   ngOnInit(): void {
   }
   private get getTitulo(){
-    return this.mainPage.get('titulo').value;
+    return this.tituloNuevo.value;
   }
   public crearFormulario(): void{
     this.mainPage = this.fb.group({
       titulo: ['']
     });
   }
-  public nuevaTarjeta(show: boolean): void{
-    if (!this.showInputTarjeta){
-      this.showInputTarjeta = show;
-    }else{
-      this.showInputTarjeta = false;
-    }
+  public editarTarjeta(): void{
+    this.showInputTarjeta = !this.showInputTarjeta;
   }
-  public guardarTarjeta(): void{
-    // this.nuevaTarjeta();
-    this.service.NuevaTarjeta(this.getTitulo, this.idSeccion);
-    // this.resetForm();
-  }
-  public eliminarTarjeta(id: number): void{
-    // this.service.EliminarTarjeta(id);
+  public guardarCambios(): void{
+    this.service.ActualizarTarjetaTitulo(this.tarjeta.IdTarjeta, this.getTitulo);
   }
   public mostrarDialogo(tarjeta: Tarjeta): void{
     this.dialog.open(MainComponent, {
@@ -60,8 +51,17 @@ export class TarjetasComponent implements OnInit {
       data: tarjeta
     });
   }
-  public mostrarConfirmacion(id: number): void{
-    this.dialog.open(ConfirmComponent, {data: id});
+  public mostrarConfirmacion(): void{
+    const dialog = this.dialog.open(ConfirmComponent);
+    dialog.afterClosed().subscribe(confirm => {
+      if (confirm){
+        const tareas = this.tarjeta.Tareas;
+        for (const tarea of tareas) {
+          this.service.EliminarTarea(tarea.IdTarea);
+        }
+        this.service.EliminarTarjeta(this.tarjeta.IdTarjeta);
+      }
+    });
   }
 
 }

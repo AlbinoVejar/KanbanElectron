@@ -1,13 +1,27 @@
-<mat-card class="tarjeta" *ngFor="let tarjeta of allTarjetas">
-    <mat-card-content class="headerTarjeta">
+<mat-card class="tarjeta">
+    <mat-card-content class="headerTarjeta" *ngIf="!showInputTarjeta">
         <h3 class="margin-null" (click)="mostrarDialogo(tarjeta)">{{tarjeta.Titulo}}</h3>
         <button mat-icon-button [matMenuTriggerFor]="menuTarjeta" aria-label="Example icon-button with a menu" (click)="selectTarjeta = tarjeta.IdTarjeta">
             <mat-icon>more_vert</mat-icon>
         </button>
     </mat-card-content>
+    <mat-card-content *ngIf="showInputTarjeta">
+        <mat-form-field *ngIf="showInputTarjeta">
+            <mat-label>{{tarjeta.Titulo}}</mat-label>
+            <input matInput [formControl]="tituloNuevo" placeholder="Nuevo Titulo" (keyup.enter)="guardarCambios()" (keyup.Escape)="editarTarjeta()">
+        </mat-form-field>
+        <div class="itemsCenter">
+            <button mat-flat-button color="primary" (click)="guardarCambios()">Guardar</button>
+            <button mat-flat-button color="warn" (click)="editarTarjeta()">Cancelar</button>
+        </div>
+    </mat-card-content>
 </mat-card>
 
 <mat-menu #menuTarjeta="matMenu" xPosition="after">
+    <button mat-menu-item (click)="editarTarjeta()">
+        Editar
+        <mat-icon >create</mat-icon>
+    </button>
     <button mat-menu-item (click)="mostrarConfirmacion()">
         Eliminar
         <mat-icon >delete</mat-icon>
