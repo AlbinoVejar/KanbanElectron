@@ -22,7 +22,9 @@ export class TareasComponent implements OnInit {
     this.showLabel = true;
     this.nuevaTarea = false;
     this.diasabledButton = false;
-    this.completed.setValue(this.tarea.Realizada);
+    if (this.tarea){
+      this.completed.setValue(this.tarea.Realizada);
+    }
   }
 
   ngOnInit(): void {
