@@ -4,8 +4,8 @@
     </div>
 
     <mat-divider class="pure-u-1"></mat-divider>
-    <mat-card-content>
-        <app-tarjetas *ngFor="let tarjeta of seccion.Tarjetas" [tarjeta]="tarjeta" [idSeccion]="seccion.IdSeccion"></app-tarjetas>
+    <mat-card-content cdkDropList [cdkDropListData]="seccion" (cdkDropListDropped)="dropTarjeta($event)">
+        <app-tarjetas *ngFor="let tarjeta of seccion.Tarjetas" [tarjeta]="tarjeta" [idSeccion]="seccion.IdSeccion" [cdkDragData]="tarjeta" (cdkDragMoved)="dragTarjeta($event)" cdkDrag></app-tarjetas>
     </mat-card-content>
     <!-- Botón para agregar nueva tarjeta -->
     <mat-card-actions class="seccionFooter">
@@ -25,7 +25,7 @@
                 Guardar Tarjeta
             </button>
         </div>
-        <button mat-stroked-button (click)="nuevaTarjeta()" *ngIf="!showInputTarjeta">
+        <button mat-stroked-button (click)="nuevaTarjeta(seccion.IdSeccion)" *ngIf="!showInputTarjeta">
             Nueva Tarjeta
             <mat-icon>add</mat-icon>
         </button>

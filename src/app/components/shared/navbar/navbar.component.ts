@@ -1,3 +1,4 @@
+import { Tarjeta } from './../../../services/models/Tarjeta.model';
 import { SeccionesComponent } from './../../secciones/secciones.component';
 import { iTablero } from './../../../services/interfaces/iTablero';
 import { Usuario } from './../../../services/models/Usuario.model';
@@ -7,6 +8,7 @@ import { ConfigComponent } from './../../modals/config/config.component';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-navbar',
@@ -55,10 +57,17 @@ export class NavbarComponent implements OnInit {
   }
   cambiarTablero(selected: string): void{
     if (selected){
-      this.titulo = this.tableros[Number(selected) - 1].Titulo;
       this.selectTablero = Number(selected);
+      this.getTitulo(this.selectTablero);
       this.service.setSelectTablero(this.selectTablero);
       this.seccionesComponent.cambiarSecciones(this.selectTablero);
+    }
+  }
+  private getTitulo(idTablero: number): void{
+    for (const tablero of this.tableros) {
+      if (tablero.IdTablero === idTablero){
+        this.titulo = tablero.Titulo;
+      }
     }
   }
   // Dialogs
@@ -71,5 +80,8 @@ export class NavbarComponent implements OnInit {
     dialogConfig.afterClosed().subscribe((result: any) => {
       this.titulo = result;
     });
+  }
+  dropTarjeta(event: CdkDragDrop<Tarjeta[]>){
+    console.log(event);
   }
 }

@@ -4,6 +4,7 @@ import { Seccion } from './../../services/models/Seccion.model';
 import { MainService } from './../../services/main.service';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { CdkDragDrop, CdkDragEnter, CdkDragMove, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-secciones',
@@ -18,6 +19,7 @@ export class SeccionesComponent implements OnInit {
   showInputTarjeta: boolean;
   showInputNuevaSeccion: boolean;
   selectSeccion: number;
+  selectTarjetaDrag: number;
   secciones: Seccion[] = [];
   tarjetas: Tarjeta[] = [];
   selectTablero: number;
@@ -49,6 +51,9 @@ export class SeccionesComponent implements OnInit {
   get getTituloSeccion(): string{
     return this.mainPage.get('tituloSeccion').value;
   }
+  get getTituloTarjeta(): string{
+    return this.mainPage.get('tituloTarjeta').value;
+  }
   public cambiarNombre(): void{
     this.showInputName = !this.showInputName;
   }
@@ -56,13 +61,12 @@ export class SeccionesComponent implements OnInit {
     // console.log(this.tituloSeccion);
     // this.mainPage.reset();
   }
-  public nuevaTarjeta(select: number): void{
-    this.selectSeccion = select;
-    console.log(this.selectSeccion);
+  public nuevaTarjeta(seccion: number): void{
+    this.selectSeccion = seccion;
     this.showInputTarjeta = !this.showInputTarjeta;
   }
   public guardarTarjeta(): void{
-    // this.nuevaTarjeta();
+    this.service.NuevaTarjeta(this.getTituloTarjeta, this.selectSeccion);
     this.resetForm();
   }
   public NuevaSeccion(): void{
@@ -71,7 +75,7 @@ export class SeccionesComponent implements OnInit {
   public GuardarNuevaSeccion(): void{
     this.service.NuevaSeccion(this.getTituloSeccion);
   }
-  public cambiarSecciones(id: number){
+  public cambiarSecciones(id: number): void{
     this.selectTablero = id;
     this.secciones = [];
     this.service.getAllSecciones(this.selectTablero).then((data) => {
@@ -86,5 +90,22 @@ export class SeccionesComponent implements OnInit {
       const data = await this.service.getAllTarjetas(seccion.IdSeccion);
       seccion.Tarjetas = data;
     }
+  }
+  public dropTarjeta(event: CdkDragDrop<Seccion[]>): void{
+    if (event.previousContainer === event.container){
+      console.log(event.container.data);
+      console.log(event.previousContainer.data);
+      // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    }else {
+      const idSeccionNew = event.container.data.IdSeccion;
+      console.log(this.selectTarjetaDrag);
+      this.service.ActualizarTarjetaIdSeccion(this.selectTarjetaDrag, idSeccionNew);
+      console.log(event.previousContainer.data);
+      // transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    }
+    // console.log(this.secciones);
+  }
+  public dragTarjeta(event: CdkDragMove<Tarjeta>){
+    this.selectTarjetaDrag = event.source.data.IdTarjeta;
   }
 }
