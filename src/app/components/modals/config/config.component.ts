@@ -1,6 +1,7 @@
+import { ConfirmComponent } from './../confirm/confirm.component';
 import { MainService } from './../../../services/main.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog} from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 
@@ -18,7 +19,8 @@ export class ConfigComponent implements OnInit {
     public dialogRef: MatDialogRef<ConfigComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private service: MainService
+    private service: MainService,
+    private dialog: MatDialog
   ) {
     this.showEditTitulo = false;
     this.tableroActual = Number(data.idTablero);
@@ -49,5 +51,13 @@ export class ConfigComponent implements OnInit {
   }
   public editarTitulo(): void{
     this.showEditTitulo = true;
+  }
+  public eliminarTablero(): void{
+    const result = this.dialog.open(ConfirmComponent);
+    result.afterClosed().subscribe((data: boolean) => {
+      if (data){
+        this.service.EliminarTablero(this.tableroActual);
+      }
+    });
   }
 }

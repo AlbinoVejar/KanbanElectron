@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit {
   }
   cambiarTablero(selected: string): void{
     if (selected){
-      this.titulo = this.tableros[selected].Titulo;
+      this.titulo = this.tableros[Number(selected) - 1].Titulo;
       this.selectTablero = Number(selected);
       this.service.setSelectTablero(this.selectTablero);
       this.seccionesComponent.cambiarSecciones(this.selectTablero);
