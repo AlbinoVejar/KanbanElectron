@@ -9,7 +9,7 @@
         <mat-divider></mat-divider>
     </div>
     <mat-dialog-content class="pure-u-1" [formGroup]="mainPage">
-        <div class="pure-u-1 contentRow">
+        <div class="pure-u-1 contentRow" *ngIf="!showNuevoTablero">
             <h4 class="title">Tablero Actual: </h4>
             <h4 *ngIf="!showEditTitulo">{{tableroTitulo}}</h4>
             <mat-form-field *ngIf="showEditTitulo">
@@ -19,18 +19,41 @@
                   <mat-icon>close</mat-icon>
                 </button>
             </mat-form-field>
-            <button mat-icon-button (click)="editarTitulo()">
+            <button mat-icon-button *ngIf="!showEditTitulo" (click)="editarTitulo()">
                 <mat-icon>edit</mat-icon>
             </button>
         </div>
-        <div class="contentRow">
-            <button mat-flat-button color="primary" (click)="eliminarTablero()">
+        <div class="pure-u-1 contentRow" *ngIf="showEditTitulo">
+            <button mat-flat-button color="primary" (click)="guardarNuevoTitulo()">
+                Guardar
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+        <div class="pure-u-1 contentRow" *ngIf="showNuevoTablero">
+            <mat-form-field>
+                <mat-label>Nuevo Titulo</mat-label>
+                <input matInput type="text" formControlName="nuevoTitulo" (keyup.enter)="guardarNuevoTablero()" #newTablero>
+                <button mat-button *ngIf="newTablero.value" matSuffix mat-icon-button aria-label="Clear" (click)="newTablero.value=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <button mat-flat-button color="primary" (click)="guardarNuevoTablero()">
+                Guardar
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+        <div class="contentRow" *ngIf="!showEditTitulo">
+            <button mat-flat-button color="primary" [disabled]="showNuevoTablero" (click)="nuevoTablero()">
+                Nuevo Tablero
+                <mat-icon>add</mat-icon>
+            </button>
+            <button mat-flat-button color="warn" [disabled]="showNuevoTablero" (click)="eliminarTablero()">
                 Eliminar Tablero
                 <mat-icon>delete</mat-icon>
             </button>
         </div>
     </mat-dialog-content>
-    <mat-dialog-actions class="pure-u-1 bottomContent">
-        <button mat-flat-button color="primary" (click)="guardarDatos()">Guardar</button>
+    <mat-dialog-actions class="pure-u-1 bottomContent" *ngIf="!showEditTitulo">
+        <button mat-flat-button color="primary" (click)="guardarDatos()">Guardar Cambios</button>
     </mat-dialog-actions>
 </div>

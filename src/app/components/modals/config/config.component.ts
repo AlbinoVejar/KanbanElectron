@@ -14,6 +14,7 @@ export class ConfigComponent implements OnInit {
   tableroActual: number;
   tableroTitulo: string;
   showEditTitulo: boolean;
+  showNuevoTablero: boolean;
   mainPage: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<ConfigComponent>,
@@ -22,6 +23,7 @@ export class ConfigComponent implements OnInit {
     private service: MainService,
     private dialog: MatDialog
   ) {
+    this.showNuevoTablero = false;
     this.showEditTitulo = false;
     this.tableroActual = Number(data.idTablero);
     this.tableroTitulo = data.titulo;
@@ -42,6 +44,7 @@ export class ConfigComponent implements OnInit {
       console.log(this.getTituloFromPage);
       this.service.ActualizarTablero(this.tableroActual, this.getTituloFromPage);
     }
+    this.mainPage.reset();
     this.dialogRef.close();
     // this.tableroActual = this.getTituloFromPage;
   }
@@ -59,5 +62,14 @@ export class ConfigComponent implements OnInit {
         this.service.EliminarTablero(this.tableroActual);
       }
     });
+  }
+  public nuevoTablero(): void{
+    this.mainPage.reset();
+    this.showNuevoTablero = true;
+  }
+  public guardarNuevoTablero(): void{
+    this.service.NuevoTablero(this.getTituloFromPage);
+    this.mainPage.reset();
+    this.showNuevoTablero = false;
   }
 }

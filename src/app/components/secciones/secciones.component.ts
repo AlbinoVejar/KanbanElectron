@@ -91,19 +91,14 @@ export class SeccionesComponent implements OnInit {
       seccion.Tarjetas = data;
     }
   }
-  public dropTarjeta(event: CdkDragDrop<Seccion[]>): void{
+  public dropTarjeta(event: CdkDragDrop<Seccion>): void{
     if (event.previousContainer === event.container){
       console.log(event.container.data);
       console.log(event.previousContainer.data);
-      // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }else {
-      const idSeccionNew = event.container.data.IdSeccion;
-      console.log(this.selectTarjetaDrag);
-      this.service.ActualizarTarjetaIdSeccion(this.selectTarjetaDrag, idSeccionNew);
-      console.log(event.previousContainer.data);
-      // transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      const idSeccionNew = event.container.data;
+      this.service.ActualizarTarjetaIdSeccion(this.selectTarjetaDrag, idSeccionNew.IdSeccion);
     }
-    // console.log(this.secciones);
   }
   public dragTarjeta(event: CdkDragMove<Tarjeta>){
     this.selectTarjetaDrag = event.source.data.IdTarjeta;

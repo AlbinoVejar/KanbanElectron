@@ -1,10 +1,10 @@
-<mat-card class="seccion" *ngFor="let seccion of secciones; index as i">
+<mat-card class="seccion" *ngFor="let seccion of secciones; index as i" cdkDropList [cdkDropListData]="seccion" (cdkDropListDropped)="dropTarjeta($event)">
     <div>
         <app-seccion-header (showNuevaTarjeta)="nuevaTarjeta($event)" [seccion]="seccion"></app-seccion-header>
     </div>
 
     <mat-divider class="pure-u-1"></mat-divider>
-    <mat-card-content cdkDropList [cdkDropListData]="seccion" (cdkDropListDropped)="dropTarjeta($event)">
+    <mat-card-content>
         <app-tarjetas *ngFor="let tarjeta of seccion.Tarjetas" [tarjeta]="tarjeta" [idSeccion]="seccion.IdSeccion" [cdkDragData]="tarjeta" (cdkDragMoved)="dragTarjeta($event)" cdkDrag></app-tarjetas>
     </mat-card-content>
     <!-- Botón para agregar nueva tarjeta -->
