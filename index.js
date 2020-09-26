@@ -7,16 +7,17 @@ let mainWindow;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1280,
+        height: 720,
         webPreferences: {
             nodeIntegration: true
         }
     });
-
-    mainWindow.loadURL('http://localhost:4200');
+    mainWindow.loadURL(`file://${process.cwd()}/dist/index.html`);
+    mainWindow.removeMenu();
+    // mainWindow.loadURL('http://localhost:4200');
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 
     mainWindow.on('closed', function() {
         mainWindow = null;
@@ -75,36 +76,3 @@ ipcMain.handle('delete', async(event, arg) => {
         event.returnValue = 'Error';
     }
 });
-// ipcMain.on('getOne', (req, res) => {
-//     sql.getOne(res)
-//         .then((data) => {
-//             req.reply('setOne', data);
-//         })
-//         .catch((err) => {
-//             req.returnValue('Ocurrió un error');
-//         });
-// });
-// ipcMain.on('insert', (req, res) => {
-//     sql.insert(res).then((data) => {
-//         req.reply('inserted', data);
-//         sql.cerrar();
-//     }).catch((err) => {
-//         req.returnValue('Ocurrió un error');
-//     });
-// });
-// ipcMain.on('update', (req, res) => {
-//     sql.update(res).then((data) => {
-//         req.reply('updated', data);
-//         sql.cerrar();
-//     }).catch((err) => {
-//         req.returnValue('Ocurrió un error');
-//     });
-// });
-// ipcMain.on('delete', (req, res) => {
-//     sql.delete(res).then((data) => {
-//         req.reply('deleted', data);
-//         sql.cerrar();
-//     }).catch((err) => {
-//         req.returnValue('Ocurrió un error');
-//     });
-// });

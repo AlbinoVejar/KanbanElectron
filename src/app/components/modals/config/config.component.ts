@@ -41,8 +41,8 @@ export class ConfigComponent implements OnInit {
   }
   public guardarDatos(): void{
     if (this.mainPage.get('nuevoTitulo').untouched){
-      console.log(this.getTituloFromPage);
       this.service.ActualizarTablero(this.tableroActual, this.getTituloFromPage);
+      this.tableroTitulo = this.getTituloFromPage;
     }
     this.mainPage.reset();
     this.dialogRef.close();

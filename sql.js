@@ -1,8 +1,8 @@
 function sqlModule() {
     const sql = require('sqlite3').verbose();
-    const db = new sql.Database('./src/assets/database.db', (err) => {
+    // const db = new sql.Database('./src/assets/database.db', (err) => {
+    const db = new sql.Database('./dist/assets/database.db', (err) => {
         if (err) console.error(err.message);
-        console.log('Connected to Database');
     });
     //Convert Promise
     const getPromise = (query) => {

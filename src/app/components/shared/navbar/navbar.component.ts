@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
     const data = await this.service.getAllTableros(1);
     this.tableros = data;
   }
-  crearForm(): void{
+  private crearForm(): void{
     this.mainForm = this.fb.group({
       tituloTablero: ['']
     });
@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit {
   get getTituloTablero(): string{
     return this.mainForm.get('tituloTablero').value;
   }
-  cambiarTablero(selected: string): void{
+  public cambiarTablero(selected: string): void{
     if (selected){
       this.selectTablero = Number(selected);
       this.getTitulo(this.selectTablero);
@@ -71,7 +71,7 @@ export class NavbarComponent implements OnInit {
     }
   }
   // Dialogs
-  openConfig(data: string): void{
+  public openConfig(data: string): void{
     const dialogConfig = this.dialog.open(ConfigComponent, {
       width: '400px',
       data: {titulo: this.titulo, idTablero: this.selectTablero}
@@ -79,9 +79,11 @@ export class NavbarComponent implements OnInit {
 
     dialogConfig.afterClosed().subscribe((result: any) => {
       this.titulo = result;
+      this.resetTableros();
     });
   }
-  dropTarjeta(event: CdkDragDrop<Tarjeta[]>){
-    console.log(event);
+  private resetTableros(): void{
+    this.tableros = [];
+    this.getTableros().then((data) => {});
   }
 }
