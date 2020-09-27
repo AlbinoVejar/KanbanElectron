@@ -34,17 +34,20 @@ export class ConfigComponent implements OnInit {
   get getTituloFromPage(): string{
     return this.mainPage.get('nuevoTitulo').value;
   }
+  get getTituloNuevo(): string{
+    return this.mainPage.get('tableroNuevo').value;
+  }
   private crearForma(): void{
     this.mainPage = this.fb.group({
-      nuevoTitulo: this.tableroTitulo
+      nuevoTitulo: this.tableroTitulo,
+      tableroNuevo: ['']
     });
   }
   public guardarDatos(): void{
-    if (this.mainPage.get('nuevoTitulo').untouched){
+    if (!this.mainPage.get('nuevoTitulo').untouched){
       this.service.ActualizarTablero(this.tableroActual, this.getTituloFromPage);
       this.tableroTitulo = this.getTituloFromPage;
     }
-    this.mainPage.reset();
     this.dialogRef.close();
     // this.tableroActual = this.getTituloFromPage;
   }
@@ -64,12 +67,11 @@ export class ConfigComponent implements OnInit {
     });
   }
   public nuevoTablero(): void{
-    this.mainPage.reset();
     this.showNuevoTablero = true;
   }
   public guardarNuevoTablero(): void{
-    this.service.NuevoTablero(this.getTituloFromPage);
-    this.mainPage.reset();
+    this.service.NuevoTablero(this.getTituloNuevo).then((data) => {});
     this.showNuevoTablero = false;
+    this.mainPage.reset();
   }
 }

@@ -40,6 +40,9 @@ export class MainService {
   public setSelectTablero(idTablero: number): void{
     this.tableroSeleccionado = idTablero;
   }
+  public get getTableroSeleccionado(): number{
+    return this.tableroSeleccionado;
+  }
   public get getUsuario(): number{
     return this.usuario.IdUsuario;
   }
@@ -86,7 +89,7 @@ export class MainService {
 
   // public insert
   public async NuevoTablero(nombre: string): Promise<any>{
-    return await this.service.insertTableroSQL(nombre, this.tableroSeleccionado  );
+    return await this.service.insertTableroSQL(nombre, 1);
   }
   public async NuevaSeccion(titulo: string): Promise<any>{
     return await this.service.insertSeccionSQL(titulo, this.tableroSeleccionado);

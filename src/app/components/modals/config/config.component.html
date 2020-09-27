@@ -32,7 +32,7 @@
         <div class="pure-u-1 contentRow" *ngIf="showNuevoTablero">
             <mat-form-field>
                 <mat-label>Nuevo Titulo</mat-label>
-                <input matInput type="text" formControlName="nuevoTitulo" (keyup.enter)="guardarNuevoTablero()" #newTablero>
+                <input matInput type="text" formControlName="tableroNuevo" (keyup.enter)="guardarNuevoTablero()" #newTablero>
                 <button mat-button *ngIf="newTablero.value" matSuffix mat-icon-button aria-label="Clear" (click)="newTablero.value=''">
                   <mat-icon>close</mat-icon>
                 </button>

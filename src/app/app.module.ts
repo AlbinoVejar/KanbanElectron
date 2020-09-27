@@ -18,6 +18,7 @@ import { MainComponent } from './components/modals/main/main.component';
 import { BooleanPipe } from './services/pipes/boolean.pipe';
 import { SeccionHeaderComponent } from './components/shared/seccion-header/seccion-header.component';
 import { ConfirmComponent } from './components/modals/confirm/confirm.component';
+import { SeccionActionsComponent } from './components/shared/seccion-actions/seccion-actions.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ConfirmComponent } from './components/modals/confirm/confirm.component'
     MainComponent,
     BooleanPipe,
     SeccionHeaderComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    SeccionActionsComponent
   ],
   imports: [
     BrowserModule,

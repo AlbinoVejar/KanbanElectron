@@ -31,7 +31,8 @@ export class SeccionesComponent implements OnInit {
     this.showInputName = false;
     this.showInputTarjeta = false;
     this.showInputNuevaSeccion = false;
-    // this.selectTablero = this;
+    console.log(this.service.getTableroSeleccionado);
+    // this.selectTablero = this.service.getTableroSeleccionado;
     this.service.getAllSecciones(1).then((data) => {
       this.secciones = data;
       this.selectTablero = this.service.tableroSeleccionado;
@@ -64,10 +65,13 @@ export class SeccionesComponent implements OnInit {
   public nuevaTarjeta(seccion: number): void{
     this.selectSeccion = seccion;
     this.showInputTarjeta = !this.showInputTarjeta;
+    this.tarjetaComponent.showNuevaTarjeta = true;
   }
-  public guardarTarjeta(): void{
-    this.service.NuevaTarjeta(this.getTituloTarjeta, this.selectSeccion);
-    this.resetForm();
+  public guardarTarjeta(idSeccion: number): void{
+    this.secciones = [];
+    this.service.getAllSecciones(this.selectTablero).then((data) => {
+      this.secciones = data;
+    });
   }
   public NuevaSeccion(): void{
     this.showInputNuevaSeccion = !this.showInputNuevaSeccion;

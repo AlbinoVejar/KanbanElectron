@@ -57,7 +57,7 @@ export class ControlService {
   }
   // INSERT
   public async insertTableroSQL(titulo: string, idUsuario: number): Promise<any>{
-    const query = `INSERT INTO Tableros(Titulo, FechaCreacion, IdUsuario) VALUES('${titulo}','${this.getFechaNow}',${idUsuario})`;
+    const query = `INSERT INTO Tableros(Titulo, FechaCreacion, IdUsuario) VALUES('${titulo}', ${this.getFechaNow()}, ${idUsuario})`;
     return await this.runScript(Sql.Insert, query);
   }
   public async insertSeccionSQL(titulo: string, idTablero: number): Promise<any>{

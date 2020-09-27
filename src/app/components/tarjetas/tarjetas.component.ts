@@ -15,8 +15,10 @@ export class TarjetasComponent implements OnInit {
   @Input() tarjeta: Tarjeta;
   @Input() idSeccion: number;
   showInputTarjeta: boolean;
+  showNuevaTarjeta: boolean;
   mainPage: FormGroup;
   tituloNuevo = new FormControl('');
+  tituloTarjeta = new FormControl('');
   titulo: string;
   selectTarjeta: number;
   constructor(
@@ -26,6 +28,7 @@ export class TarjetasComponent implements OnInit {
   ) {
     this.selectTarjeta = 0;
     this.showInputTarjeta = false;
+    this.showNuevaTarjeta = false;
   }
 
   ngOnInit(): void {
@@ -63,5 +66,7 @@ export class TarjetasComponent implements OnInit {
       }
     });
   }
+  public guardarTarjeta(){
 
+  }
 }
