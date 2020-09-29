@@ -3,7 +3,7 @@ import { MainService } from './../../services/main.service';
 import { Tarjeta } from './../../services/models/Tarjeta.model';
 import { MainComponent } from './../modals/main/main.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
   styleUrls: ['./tarjetas.component.css']
 })
 export class TarjetasComponent implements OnInit {
+  @Output() resetTarjetas = new EventEmitter<number>();
   @Input() tarjeta: Tarjeta;
   @Input() idSeccion: number;
   showInputTarjeta: boolean;
@@ -46,6 +47,7 @@ export class TarjetasComponent implements OnInit {
   }
   public guardarCambios(): void{
     this.service.ActualizarTarjetaTitulo(this.tarjeta.IdTarjeta, this.getTitulo);
+    this.resetTarjetas.emit(this.idSeccion);
   }
   public mostrarDialogo(tarjeta: Tarjeta): void{
     this.dialog.open(MainComponent, {
@@ -63,10 +65,8 @@ export class TarjetasComponent implements OnInit {
           this.service.EliminarTarea(tarea.IdTarea);
         }
         this.service.EliminarTarjeta(this.tarjeta.IdTarjeta);
+        this.resetTarjetas.emit(this.idSeccion);
       }
     });
-  }
-  public guardarTarjeta(){
-
   }
 }

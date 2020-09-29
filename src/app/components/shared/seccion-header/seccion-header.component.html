@@ -3,7 +3,7 @@
     <div *ngIf="showInputName">
         <mat-form-field class="pb-0">
             <mat-label>Nuevo nombre</mat-label>
-            <input matInput type="text" [formControl]="tituloSeccion" (keyup.enter)="cambiarNombre()" [placeholder]="seccion.Titulo" #titulo>
+            <input matInput type="text" [formControl]="tituloSeccion" (keyup.enter)="actualizarNombre()" (keyup.Escape)="cambiarNombre()" [placeholder]="seccion.Titulo" #titulo>
             <button mat-button *ngIf="titulo.value" matSuffix mat-icon-button aria-label="Clear" (click)="titulo.value=''">
                 <mat-icon>close</mat-icon>
             </button>

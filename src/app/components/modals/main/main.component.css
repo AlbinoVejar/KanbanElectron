@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.inputDescripcion {
+    width: 92%;
+}
+
 h2 {
     margin-bottom: 1%;
 }
@@ -20,4 +24,16 @@ h3 {
 .header-modal {
     margin-top: 2%;
     margin-left: 1%;
+}
+
+.nuevaTarea {
+    display: flex;
+    flex-direction: row;
+}
+
+.contentActions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 2%;
 }

@@ -2,7 +2,7 @@
     <div *ngIf="showInputNuevaTarjeta" #divTarjeta>
         <mat-form-field class="w-100">
             <mat-label>Nueva Tarjeta</mat-label>
-            <input matInput type="text" [formControl]="tituloTarjeta" (keyup.enter)="guardarTarjeta()" #tarjeta>
+            <input matInput type="text" [formControl]="tituloTarjeta" (keyup.enter)="guardarTarjeta()" (keyup.escape)="nuevaTarjeta()" #tarjeta>
             <button mat-button *ngIf="tarjeta.value" matSuffix mat-icon-button aria-label="Clear" (click)="tarjeta.value=''">
                 <mat-icon>close</mat-icon>
             </button>
@@ -11,6 +11,9 @@
     <div *ngIf="showInputNuevaTarjeta">
         <button mat-flat-button color="primary" (click)="guardarTarjeta()">
             Guardar Tarjeta
+        </button>
+        <button mat-icon-button (click)="nuevaTarjeta()">
+            <mat-icon>close</mat-icon>
         </button>
     </div>
     <button mat-stroked-button (click)="nuevaTarjeta()" *ngIf="!showInputNuevaTarjeta">

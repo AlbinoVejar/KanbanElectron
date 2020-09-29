@@ -93,11 +93,13 @@ export class SeccionesComponent implements OnInit {
       // this.service.setSelectTablero(this.selectTablero);
     });
   }
-  private async cargarTarjetas(){
-    const tarjetas = [];
+  public cargarTarjetas(idSeccion: number): void{
     for (const seccion of this.secciones) {
-      const data = await this.service.getAllTarjetas(seccion.IdSeccion);
-      seccion.Tarjetas = data;
+      if (seccion.IdSeccion === idSeccion){
+        this.service.getAllTarjetas(seccion.IdSeccion).then((data) => {
+          seccion.Tarjetas = data;
+        });
+      }
     }
   }
   public dropTarjeta(event: CdkDragDrop<Seccion>): void{
@@ -107,6 +109,7 @@ export class SeccionesComponent implements OnInit {
     }else {
       const idSeccionNew = event.container.data;
       this.service.ActualizarTarjetaIdSeccion(this.selectTarjetaDrag, idSeccionNew.IdSeccion);
+      this.resetSecciones();
     }
   }
   public dragTarjeta(event: CdkDragMove<Tarjeta>){

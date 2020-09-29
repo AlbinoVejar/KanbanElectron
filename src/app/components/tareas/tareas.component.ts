@@ -1,6 +1,6 @@
 import { MainService } from './../../services/main.service';
 import { Tarea } from './../../services/models/Tarea.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./tareas.component.css']
 })
 export class TareasComponent implements OnInit {
+  @Output() actualizarTareas = new EventEmitter<void>();
   @Input() tarea: Tarea;
   @Input() idTarjeta: number;
   nuevaDescripcion = new FormControl('');
@@ -41,24 +42,28 @@ export class TareasComponent implements OnInit {
       return 0;
     }
   }
-  public hiddenLabel(): void{
+  public controlDescripcionTarea(): void{
     this.showLabel = !this.showLabel;
   }
-  public showNuevaTarea(): void{
-    this.nuevaTarea = !this.nuevaTarea;
-    this.diasabledButton = !this.diasabledButton;
+  public comenzarEdicion(): void{
+    this.controlDescripcionTarea();
+    this.nuevaDescripcion.setValue(this.tarea.Titulo);
+  }
+  public cancelarEdicion(): void{
+    this.controlDescripcionTarea();
+    this.nuevaDescripcion.reset();
   }
   public eliminarTarea(): void{
     this.service.EliminarTarea(this.tarea.IdTarea);
-  }
-  public crearTarea($event): void{
-    $event.preventDefault();
-    this.service.NuevaTarea(this.getTitulo, this.idTarjeta).then((data) => {console.log(data); });
+    this.actualizarTareas.emit();
   }
   public actualizarTarea(): void{
     this.service.ActualizarTareaTitulo(this.tarea.IdTarea, this.getTitulo);
+    this.nuevaDescripcion.reset();
+    this.actualizarTareas.emit();
   }
   public actualizarEstadoTarea(): void{
     this.service.ActualizarTareaCheck(this.tarea.IdTarea, this.getCompletado());
+    this.actualizarTareas.emit();
   }
 }

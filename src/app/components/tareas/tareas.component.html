@@ -2,15 +2,19 @@
     <div class="pure-u-1">
         <section class="tarea">
             <div class="contentTarea">
-                <mat-checkbox (change)="actualizarEstadoTarea()" [formControl]="completed" value="this.tarea.Realizada"></mat-checkbox>
-                <mat-label class="inputTarea" *ngIf="showLabel" (click)="hiddenLabel()">{{tarea.Titulo}}</mat-label>
-                <mat-form-field *ngIf="!showLabel">
-                    <textarea matInput [formControl]="nuevaDescripcion" class="inputTarea" placeholder="Nuevo Elemento" (keyup.enter)="actualizarTarea()">{{tarea.Titulo}}</textarea>
+                <mat-checkbox (change)="actualizarEstadoTarea()" [formControl]="completed" [value]="this.tarea.Realizada"></mat-checkbox>
+                <mat-label class="inputTarea" *ngIf="showLabel" (click)="controlDescripcionTarea()">{{tarea.Titulo}}</mat-label>
+                <mat-form-field class="edicionDescripcion" *ngIf="!showLabel">
+                    <textarea matInput [formControl]="nuevaDescripcion" class="inputTarea" placeholder="Nuevo Elemento"></textarea>
+                    <button mat-stroked-button (click)="actualizarTarea()">Guardar</button>
+                    <button mat-icon-button (click)="cancelarEdicion()">
+                        <mat-icon>close</mat-icon>
+                    </button>
                 </mat-form-field>
             </div>
             <div class="options">
                 <button mat-icon-button>
-                    <mat-icon (click)="hiddenLabel()">create</mat-icon>
+                    <mat-icon (click)="controlDescripcionTarea()">create</mat-icon>
                 </button>
                 <button mat-icon-button>
                     <mat-icon (click)="eliminarTarea()">delete</mat-icon>
