@@ -1,6 +1,6 @@
 <mat-card class="seccion" *ngFor="let seccion of secciones; index as i" cdkDropList [cdkDropListData]="seccion" (cdkDropListDropped)="dropTarjeta($event)">
     <div>
-        <app-seccion-header (showNuevaTarjeta)="nuevaTarjeta($event)" [seccion]="seccion"></app-seccion-header>
+        <app-seccion-header (actualizarSecciones)="resetSecciones()" (showNuevaTarjeta)="nuevaTarjeta($event)" [seccion]="seccion"></app-seccion-header>
     </div>
 
     <mat-divider class="pure-u-1"></mat-divider>

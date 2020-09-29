@@ -66,6 +66,12 @@ export class SeccionesComponent implements OnInit {
     this.showInputTarjeta = !this.showInputTarjeta;
     this.tarjetaComponent.showNuevaTarjeta = true;
   }
+  public resetSecciones(): void{
+    this.secciones = [];
+    this.service.getAllSecciones(this.selectTablero).then((data) => {
+      this.secciones = data;
+    });
+  }
   public guardarTarjeta(idSeccion: number): void{
     this.secciones = [];
     this.service.getAllSecciones(this.selectTablero).then((data) => {

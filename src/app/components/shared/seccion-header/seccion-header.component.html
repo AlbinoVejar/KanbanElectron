@@ -1,19 +1,17 @@
 <div class="seccionHeader">
     <h2 class="textHeader" *ngIf="!showInputName" (click)="cambiarNombre()">{{seccion.Titulo}}</h2>
     <div *ngIf="showInputName">
-        <form [formGroup]="form">
-            <mat-form-field class="pb-0">
-                <mat-label>Nuevo nombre</mat-label>
-                <input matInput type="text" formControlName="tituloSeccion" (keyup.enter)="cambiarNombre()" [placeholder]="seccion.Titulo" #titulo>
-                <button mat-button *ngIf="titulo.value" matSuffix mat-icon-button aria-label="Clear" (click)="titulo.value=''">
-                    <mat-icon>close</mat-icon>
-                </button>
-            </mat-form-field>
-            <div class="seccionButtons">
-                <button mat-flat-button color="primary" (click)="actualizarNombre()">Guardar</button>
-                <button mat-flat-button color="warn" (click)="cambiarNombre()">Cancelar</button>
-            </div>
-        </form>
+        <mat-form-field class="pb-0">
+            <mat-label>Nuevo nombre</mat-label>
+            <input matInput type="text" [formControl]="tituloSeccion" (keyup.enter)="cambiarNombre()" [placeholder]="seccion.Titulo" #titulo>
+            <button mat-button *ngIf="titulo.value" matSuffix mat-icon-button aria-label="Clear" (click)="titulo.value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <div class="seccionButtons">
+            <button mat-flat-button color="primary" (click)="actualizarNombre()">Guardar</button>
+            <button mat-flat-button color="warn" (click)="cambiarNombre()">Cancelar</button>
+        </div>
     </div>
     <button mat-icon-button aria-label="More Options" [matMenuTriggerFor]="moreOptionsSeccion">
         <mat-icon>more_vert</mat-icon>
