@@ -1,4 +1,4 @@
-export interface iTablero{
+export interface ITablero{
     IdTablero: number;
     Titulo: string;
     FechaCreacion: Date;

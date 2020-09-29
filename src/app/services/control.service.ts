@@ -34,6 +34,18 @@ export class ControlService {
   private async runScript(script: string, query: string): Promise<any>{
     return await this.electron.ipcRenderer.invoke(script, query);
   }
+  public async getConfiguracionSQL(){
+    const query = 'SELECT * FROM Configuracion;';
+    return await this.runScript(Sql.GetOne, query);
+  }
+  public async getTableroSeleccionadoSQL(){
+    const query = 'SELECT TableroSeleccionado FROM Configuracion;';
+    return await this.runScript(Sql.GetOne, query);
+  }
+  public async getTemaSeleccionadoSQL(){
+    const query = 'SELECT TemaSeleccionado FROM Configuracion;';
+    return await this.runScript(Sql.GetOne, query);
+  }
   public async getUsuarioSQL(){
     const query = 'SELECT * FROM Usuarios;';
     return await this.runScript(Sql.GetOne, query);
@@ -73,6 +85,14 @@ export class ControlService {
     return await this.runScript(Sql.Insert, query);
   }
   // UPDATES
+  public async updateTableroSeleccionadoSQL(idTablero: number): Promise<any>{
+    const query = `UPDATE Configuracion SET TableroSeleccionado = ${idTablero};`;
+    return await this.runScript(Sql.Update, query);
+  }
+  public async updateTemaSeleccionadoSQL(tema: string): Promise<any>{
+    const query = `UPDATE Configuracion SET TemaSeleccionado = '${tema}';`;
+    return await this.runScript(Sql.Update, query);
+  }
   public async updateTableroSQL(idTablero: number, titulo: string): Promise<any>{
     const query = `UPDATE  Tableros SET Titulo = '${titulo}' WHERE IdTablero = ${idTablero};`;
     return await this.runScript(Sql.Update, query);

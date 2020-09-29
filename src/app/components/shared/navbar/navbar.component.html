@@ -1,8 +1,4 @@
-<!-- <form [formGroup]="mainForm">
-
-</form> -->
 <mat-toolbar class="navbar" color="primary">
-    <!-- <h1 class="selected" *ngIf="!selectTableros" (click)="showOptionsTablero()">{{this.service.getSelectTablero.Titulo}}</h1> -->
     <mat-form-field appearance="fill">
         <mat-select [value]="selectTablero" disableRipple (selectionChange)="cambiarTablero($event.value)">
             <mat-option [value]="tablero.IdTablero" *ngFor="let tablero of tableros">{{tablero.Titulo}}</mat-option>

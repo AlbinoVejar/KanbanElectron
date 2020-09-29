@@ -1,4 +1,4 @@
-export interface iTarjeta{
+export interface ITarjeta{
     IdTarjeta: number;
     Titulo: string;
     Descripcion: string;

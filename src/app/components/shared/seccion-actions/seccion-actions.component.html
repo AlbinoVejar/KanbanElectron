@@ -13,8 +13,8 @@
             Guardar Tarjeta
         </button>
     </div>
+    <button mat-stroked-button (click)="nuevaTarjeta()" *ngIf="!showInputNuevaTarjeta">
+        Nueva Tarjeta
+        <mat-icon>add</mat-icon>
+    </button>
 </div>
-<button mat-stroked-button (click)="nuevaTarjeta()" *ngIf="!showInputNuevaTarjeta">
-    Nueva Tarjeta
-    <mat-icon>add</mat-icon>
-</button>

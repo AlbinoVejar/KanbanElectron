@@ -2,7 +2,7 @@ import { Tarjeta } from './../../services/models/Tarjeta.model';
 import { TarjetasComponent } from './../tarjetas/tarjetas.component';
 import { Seccion } from './../../services/models/Seccion.model';
 import { MainService } from './../../services/main.service';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CdkDragDrop, CdkDragEnter, CdkDragMove, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
@@ -28,18 +28,17 @@ export class SeccionesComponent implements OnInit {
     private service: MainService
   ) {
     this.crearFormulario();
+    this.service.getTableroSeleccionado().then((data) => {
+      this.selectTablero = data;
+      this.service.getAllSecciones(this.selectTablero).then((secciones) => {
+        this.secciones = secciones;
+      });
+    });
     this.showInputName = false;
     this.showInputTarjeta = false;
     this.showInputNuevaSeccion = false;
-    console.log(this.service.getTableroSeleccionado);
-    // this.selectTablero = this.service.getTableroSeleccionado;
-    this.service.getAllSecciones(1).then((data) => {
-      this.secciones = data;
-      this.selectTablero = this.service.tableroSeleccionado;
-    });
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   public crearFormulario(): void{
     this.mainPage = this.fb.group({
       tituloSeccion: [''],
@@ -85,7 +84,7 @@ export class SeccionesComponent implements OnInit {
     this.service.getAllSecciones(this.selectTablero).then((data) => {
       this.secciones = data;
       // this.cargarTarjetas().then((data) => {});
-      this.service.setSelectTablero(this.selectTablero);
+      // this.service.setSelectTablero(this.selectTablero);
     });
   }
   private async cargarTarjetas(){

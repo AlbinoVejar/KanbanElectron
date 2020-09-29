@@ -1,4 +1,4 @@
-export interface iTarea{
+export interface ITarea{
     IdTarea: number;
     Titulo: string;
     Realizada: boolean;

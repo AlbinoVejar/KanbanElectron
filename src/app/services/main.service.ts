@@ -1,11 +1,12 @@
+import { IConfig } from './interfaces/iConfig';
 import { ControlService } from './control.service';
 import { Tarea } from './models/Tarea.model';
 import { Tarjeta } from './models/Tarjeta.model';
-import { iUsuario } from './interfaces/iUsuario';
+import { IUsuario } from './interfaces/iUsuario';
 import { Seccion } from './models/Seccion.model';
 import { Tablero } from './models/Tablero.model';
 import { Usuario } from './models/Usuario.model';
-import { AllData } from './models/AllData.model';
+import { Config } from './models/Config.model';
 import { Injectable } from '@angular/core';
 
 enum Sql {
@@ -20,7 +21,6 @@ enum Sql {
   providedIn: 'root'
 })
 export class MainService {
-  allData: AllData;
   public usuario: Usuario;
   public tableroSeleccionado: number;
   constructor(
@@ -40,14 +40,23 @@ export class MainService {
   public setSelectTablero(idTablero: number): void{
     this.tableroSeleccionado = idTablero;
   }
-  public get getTableroSeleccionado(): number{
-    return this.tableroSeleccionado;
-  }
   public get getUsuario(): number{
     return this.usuario.IdUsuario;
   }
+  public async getConfiguracion(): Promise<any>{
+    const data = await this.service.getConfiguracionSQL();
+    return Object.assign(new Config(), data);
+  }
+  public async getTableroSeleccionado(): Promise<any>{
+    const data = await this.service.getTableroSeleccionadoSQL();
+    return data.TableroSeleccionado;
+  }
+  public async getTemaSeleccionado(): Promise<any>{
+    const data = await this.service.getTemaSeleccionadoSQL();
+    return data.TemaSeleccionado;
+  }
   public async getAllUsuario(): Promise<any>{
-    const data: iUsuario = await this.service.getUsuarioSQL();
+    const data: IUsuario = await this.service.getUsuarioSQL();
     this.usuario = new Usuario(data.IdUsuario, data.Nombre);
   }
   public async getAllTableros(idUsuario: number): Promise<any>{
@@ -101,6 +110,12 @@ export class MainService {
     return await this.service.insertTareaSQL(titulo, idTarjeta);
   }
   // public update
+  public async ActualizarTableroSeleccionado(idTablero: number): Promise<any>{
+    return await this.service.updateTableroSeleccionadoSQL(idTablero);
+  }
+  public async ActualizarTemaSeleccionado(tema: string): Promise<any>{
+    return await this.service.updateTemaSeleccionadoSQL(tema);
+  }
   public async ActualizarTablero(idTablero: number, titulo: string): Promise<any>{
     return await this.service.updateTableroSQL(idTablero, titulo);
   }

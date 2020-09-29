@@ -1,14 +1,11 @@
-import { Tarjeta } from './../../../services/models/Tarjeta.model';
 import { SeccionesComponent } from './../../secciones/secciones.component';
-import { iTablero } from './../../../services/interfaces/iTablero';
 import { Usuario } from './../../../services/models/Usuario.model';
 import { MainService } from './../../../services/main.service';
 import { Tablero } from './../../../services/models/Tablero.model';
 import { ConfigComponent } from './../../modals/config/config.component';
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-navbar',
@@ -29,18 +26,15 @@ export class NavbarComponent implements OnInit {
     public dialog: MatDialog,
     public service: MainService
   ) {
-    this.crearForm();
-    // this.selectTablero = this.service.getSelectTablero;
-    this.getTableros().then((data) => {
-      this.selectTablero = this.tableros[0].IdTablero;
-      this.titulo = this.tableros[0].Titulo;
-      this.service.setSelectTablero(this.selectTablero);
+    this.service.getTableroSeleccionado().then((data) => {
+      this.selectTablero = data;
     });
+    this.getTableros();
+    // this.getTitulo(this.selectTablero);
     this.selectTableros = false;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   private async getTableros(){
     const data = await this.service.getAllTableros(1);
@@ -59,7 +53,7 @@ export class NavbarComponent implements OnInit {
     if (selected){
       this.selectTablero = Number(selected);
       this.getTitulo(this.selectTablero);
-      this.service.setSelectTablero(this.selectTablero);
+      this.service.ActualizarTableroSeleccionado(this.selectTablero);
       this.seccionesComponent.cambiarSecciones(this.selectTablero);
     }
   }
