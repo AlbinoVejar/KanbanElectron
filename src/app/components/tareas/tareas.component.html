@@ -2,7 +2,7 @@
     <div class="pure-u-1">
         <section class="tarea">
             <div class="contentTarea">
-                <mat-checkbox (change)="actualizarEstadoTarea()" [formControl]="completed" [value]="this.tarea.Realizada"></mat-checkbox>
+                <mat-checkbox (change)="actualizarEstadoTarea($event.checked)" [checked]="this.tarea.Realiza === 1"></mat-checkbox>
                 <mat-label class="inputTarea" *ngIf="showLabel" (click)="controlDescripcionTarea()">{{tarea.Titulo}}</mat-label>
                 <mat-form-field class="edicionDescripcion" *ngIf="!showLabel">
                     <textarea matInput [formControl]="nuevaDescripcion" class="inputTarea" placeholder="Nuevo Elemento"></textarea>

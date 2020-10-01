@@ -13,7 +13,7 @@ export class TareasComponent implements OnInit {
   @Input() tarea: Tarea;
   @Input() idTarjeta: number;
   nuevaDescripcion = new FormControl('');
-  completed = new FormControl('');
+  completed = new FormControl(false);
   nuevaTarea: boolean;
   showLabel: boolean;
   diasabledButton: boolean;
@@ -23,9 +23,6 @@ export class TareasComponent implements OnInit {
     this.showLabel = true;
     this.nuevaTarea = false;
     this.diasabledButton = false;
-    if (this.tarea){
-      this.completed.setValue(this.tarea.Realizada);
-    }
   }
 
   ngOnInit(): void {
@@ -34,13 +31,6 @@ export class TareasComponent implements OnInit {
   // Gets
   public get getTitulo(): string{
     return this.nuevaDescripcion.value;
-  }
-  public getCompletado(): number{
-    if (this.completed.value === true){
-      return 1;
-    }else {
-      return 0;
-    }
   }
   public controlDescripcionTarea(): void{
     this.showLabel = !this.showLabel;
@@ -62,8 +52,9 @@ export class TareasComponent implements OnInit {
     this.nuevaDescripcion.reset();
     this.actualizarTareas.emit();
   }
-  public actualizarEstadoTarea(): void{
-    this.service.ActualizarTareaCheck(this.tarea.IdTarea, this.getCompletado());
-    this.actualizarTareas.emit();
+  public actualizarEstadoTarea(check: boolean): void{
+    this.service.ActualizarTareaCheck(this.tarea.IdTarea, Number(check)).then(() => {
+      this.actualizarTareas.emit();
+    });
   }
 }

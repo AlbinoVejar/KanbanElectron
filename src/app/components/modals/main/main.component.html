@@ -8,7 +8,7 @@
     <div class="pure-u-22-24">
         <mat-divider></mat-divider>
     </div>
-    <div class="pure-u-1">
+    <div class="pure-u-1 mt-1">
         <h2 mat-dialog-content>Descripción</h2>
         <mat-dialog-content class="content" *ngIf="!showDescripcion">
             <h3 (click)="controlDescripcion()">{{tarjeta.Descripcion}}</h3>
@@ -16,17 +16,24 @@
         <!-- Seccion para agregar descripción -->
         <mat-form-field class="inputDescripcion" *ngIf="showDescripcion">
             <mat-label>Agregar una descripción</mat-label>
-            <textarea matInput [formControl]="descripcion" placeholder="Ejem: Esta tarea..." (keyup.Escape)="controlDescripcion()"></textarea>
+            <textarea matInput [formControl]="descripcion" placeholder="Ejem: Esta tarea..." (keyup.Escape)="controlDescripcion()" #info></textarea>
+            <button type="button" mat-button *ngIf="info.value" matSuffix mat-icon-button aria-label="Clear" (click)="info.value=''">
+                <mat-icon>close</mat-icon>
+            </button>
             <button mat-stroked-button (click)="guardarDescripcion()">Guardar</button>
             <button mat-icon-button (click)="controlDescripcion()">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
-        <button mat-stroked-button *ngIf="!tarjeta.Descripcion" (click)="controlDescripcion()">Agregar descripción</button>
+        <section class="nuevaTarea">
+            <button mat-stroked-button *ngIf="!tarjeta.Descripcion" [disabled]="showDescripcion" (click)="controlDescripcion()">Agregar descripción
+                <mat-icon aria-hidden="false" aria-label="Agregar una descripción">add</mat-icon>
+            </button>
+        </section>
     </div>
-    <div class="pure-u-1">
+    <div class="pure-u-1 mt-1">
         <!-- Área de todas las tareas -->
-        <h2 mat-dialog-content>Lista de tareas</h2>
+        <h2 mat-dialog-content class="mb-1">Lista de tareas</h2>
         <mat-dialog-content class="content">
             <app-tareas *ngFor="let tarea of this.tarjeta.Tareas" (actualizarTareas)="resetTareas()" [tarea]="tarea" [idTarjeta]="tarjeta.IdTarjeta"></app-tareas>
         </mat-dialog-content>
@@ -39,12 +46,16 @@
                 <button type="button" mat-button *ngIf="Descripcion.value" matSuffix mat-icon-button aria-label="Clear" (click)="Descripcion.value=''">
                     <mat-icon>close</mat-icon>
                 </button>
+                <button type="button" mat-stroked-button (click)="crearTarea()">Añadir</button>
+                <button mat-icon-button (click)="controlNuevaTarea()">
+                    <mat-icon>close</mat-icon>
+                </button>
             </mat-form-field>
         </div>
-        <div class="pure-u-1-4 contentActions" *ngIf="showNuevaTarea">
+        <!-- <div class="pure-u-1-4 contentActions" *ngIf="showNuevaTarea">
             <button type="button" mat-raised-button color="primary" (click)="crearTarea()">Añadir</button>
             <button mat-raised-button color="warn" (click)="controlNuevaTarea()">Cancelar</button>
-        </div>
+        </div> -->
         <section class="nuevaTarea">
             <button mat-stroked-button (click)="controlNuevaTarea()" [disabled]="showNuevaTarea">Nueva Tarea
                 <mat-icon aria-hidden="false" aria-label="Agregar nueva tarea">add</mat-icon>

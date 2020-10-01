@@ -2,7 +2,7 @@ export class Tarea {
     constructor() {}
     public IdTarea: number;
     public Titulo: string;
-    public Realizada: boolean;
+    public Realiza: number;
     public FechaCreacion: Date;
     public IdTarjeta: number;
     public FechaTerminada?: Date;

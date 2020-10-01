@@ -53,8 +53,10 @@ export class MainComponent implements OnInit {
     this.showNuevaTarea = !this.showNuevaTarea;
   }
   public crearTarea(): void{
-    this.server.NuevaTarea(this.getNuevaTareaValue, this.tarjeta.IdTarjeta);
-    this.resetTareas();
-    this.controlNuevaTarea();
+    this.server.NuevaTarea(this.getNuevaTareaValue, this.tarjeta.IdTarjeta).then(() => {
+      this.resetTareas();
+      this.controlNuevaTarea();
+      this.nuevaTarea.reset();
+    });
   }
 }

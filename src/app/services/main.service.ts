@@ -88,10 +88,8 @@ export class MainService {
   public async getAllTareas(idTarjeta: number): Promise<any>{
     const tareas: Tarea[] = [];
     const items = await this.service.getTareasSQL(idTarjeta);
-    if (items){
-      for (const tarea of items) {
-        tareas.push(Object.assign(new Tarea(), tarea));
-      }
+    for (const tarea of items) {
+      tareas.push(Object.assign(new Tarea(), tarea));
     }
     return tareas;
   }
