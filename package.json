@@ -40,6 +40,10 @@
         "start": "electron .",
         "pack": "electron-builder --dir",
         "dist": "electron-builder",
+        "mwl": "electron-builder -mwl",
+        "win": "electron-builder --win",
+        "linux": "electron-builder --linux",
+        "mac": "electron-builder --mac",
         "electronRun": "electron ."
     },
     "private": true,
