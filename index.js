@@ -15,9 +15,8 @@ function createWindow() {
     });
     mainWindow.loadURL(`file://${process.cwd()}/dist/index.html`);
     mainWindow.removeMenu();
-    // mainWindow.loadURL('http://localhost:4200');
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 
     mainWindow.on('closed', function() {
         mainWindow = null;

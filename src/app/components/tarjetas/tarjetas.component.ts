@@ -61,11 +61,15 @@ export class TarjetasComponent implements OnInit {
     dialog.afterClosed().subscribe(confirm => {
       if (confirm){
         const tareas = this.tarjeta.Tareas;
-        for (const tarea of tareas) {
-          this.service.EliminarTarea(tarea.IdTarea);
+        if (tareas){
+          for (const tarea of tareas) {
+            this.service.EliminarTarea(tarea.IdTarea);
+          }
         }
-        this.service.EliminarTarjeta(this.tarjeta.IdTarjeta);
-        this.resetTarjetas.emit(this.idSeccion);
+        console.log(this.tarjeta.IdTarjeta);
+        this.service.EliminarTarjeta(this.tarjeta.IdTarjeta).then(() => {
+          this.resetTarjetas.emit(this.idSeccion);
+        });
       }
     });
   }

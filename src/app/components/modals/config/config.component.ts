@@ -23,6 +23,7 @@ export class ConfigComponent implements OnInit {
     private service: MainService,
     private dialog: MatDialog
   ) {
+    console.log(data);
     this.showNuevoTablero = false;
     this.showEditTitulo = false;
     this.tableroActual = Number(data.idTablero);

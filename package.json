@@ -16,8 +16,11 @@
             "output": "release",
             "buildResources": "dist"
         },
-        "win": {
-            "target": "NSIS"
+        "linux": {
+            "target": "zip",
+            "maintainer": "Albino Vejar",
+            "desktop": "My Kanban",
+            "category": "Utility"
         }
     },
     "scripts": {
