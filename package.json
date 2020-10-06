@@ -7,17 +7,24 @@
         "asar": true,
         "files": [
             "**/*",
-            "dist/**/*"
+            "dist/**/*",
+            "build/**/*"
         ],
         "extraFiles": [
             "dist"
         ],
         "directories": {
             "output": "release",
-            "buildResources": "dist"
+            "buildResources": "build"
         },
         "win": {
-            "target": "NSIS"
+            "target": "NSIS",
+            "icon": "build/icon.png"
+        },
+        "linux": {
+            "target": "AppImage",
+            "maintainer": "Albino Vejar",
+            "icon": "build/icons"
         }
     },
     "scripts": {
