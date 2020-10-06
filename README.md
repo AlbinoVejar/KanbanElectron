@@ -18,6 +18,6 @@ Se desarrolló utilizando las tecnologías de NodeJs, ElectronJs y Angular
   * Doble clic en el archivo KanbaMe-setup.exe
 
 ## Descargar
-* [Windows](https://github.com/AlbinoVejar/KanbanElectron/releases/download/1.0-beta/MyKanban-beta-windows.zip)
-* [Linux](https://github.com/AlbinoVejar/KanbanElectron/releases/download/1.0-beta/My-Kanban_beta-linux.zip)
+* [Windows](https://github.com/AlbinoVejar/KanbanElectron/releases/download/1.0-beta/Kanbame-beta-Windows.zip)
+* [Linux](https://github.com/AlbinoVejar/KanbanElectron/releases/download/1.0-beta/Kanbame-beta-linux.zip)
 * Mac (pendiente)
