@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatDialogModule,
     MatDividerModule,
     MatCheckboxModule,
-    DragDropModule
+    DragDropModule,
+    MatSlideToggleModule,
   ],
   exports: [
     MatSliderModule,
@@ -47,7 +49,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatDialogModule,
     MatDividerModule,
     MatCheckboxModule,
-    DragDropModule
+    DragDropModule,
+    MatSlideToggleModule,
   ]
 })
 export class MaterialModule { }

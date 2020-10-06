@@ -1,10 +1,9 @@
-import { ITablero } from './../../../services/interfaces/iTablero';
 import { SeccionesComponent } from './../../secciones/secciones.component';
 import { Usuario } from './../../../services/models/Usuario.model';
 import { MainService } from './../../../services/main.service';
 import { Tablero } from './../../../services/models/Tablero.model';
 import { ConfigComponent } from './../../modals/config/config.component';
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -14,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @Output() cambiarTema = new EventEmitter<void>();
   @ViewChild(SeccionesComponent)
   private seccionesComponent: SeccionesComponent;
   mainForm: FormGroup;
@@ -76,6 +76,7 @@ export class NavbarComponent implements OnInit {
     dialogConfig.afterClosed().subscribe((result: any) => {
       this.titulo = result;
       this.resetTableros();
+      this.cambiarTema.emit();
     });
   }
   private resetTableros(): void{

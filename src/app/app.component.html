@@ -1,4 +1,5 @@
-<div class="pure-g">
-    <app-navbar class="pure-u-1"></app-navbar>
-    <!-- <app-secciones></app-secciones> -->
+<div [ngClass]="{'dark-theme': darkTheme}">
+    <div class="pure-g">
+        <app-navbar (cambiarTema)="cambiarTema()" class="pure-u-1"></app-navbar>
+    </div>
 </div>

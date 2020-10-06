@@ -7,6 +7,7 @@ import { Tablero } from './models/Tablero.model';
 import { Usuario } from './models/Usuario.model';
 import { Config } from './models/Config.model';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 enum Sql {
   GetOne = 'getOne',
@@ -26,15 +27,6 @@ export class MainService {
     private service: ControlService
   ){
     this.getAllUsuario().then((data) => {});
-  }
-  private getRenderScript(script): string{
-    switch (script) {
-      case 'getOne': return 'setOne';
-      case 'getAll': return 'setAll';
-      case 'insert': return 'inserted';
-      case 'update': return 'updated';
-      case 'delete': return 'deleted';
-    }
   }
   public setSelectTablero(idTablero: number): void{
     this.tableroSeleccionado = idTablero;

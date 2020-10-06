@@ -4,7 +4,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog} from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
-
 @Component({
   selector: 'app-config',
   templateUrl: './config.component.html',
@@ -16,6 +15,7 @@ export class ConfigComponent implements OnInit {
   showEditTitulo: boolean;
   showNuevoTablero: boolean;
   mainPage: FormGroup;
+  darkTheme: boolean;
   constructor(
     public dialogRef: MatDialogRef<ConfigComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,12 +23,18 @@ export class ConfigComponent implements OnInit {
     private service: MainService,
     private dialog: MatDialog
   ) {
-    console.log(data);
     this.showNuevoTablero = false;
     this.showEditTitulo = false;
     this.tableroActual = Number(data.idTablero);
     this.tableroTitulo = data.titulo;
     this.crearForma();
+    this.service.getTemaSeleccionado().then((data) => {
+      if (data === 'dark'){
+        this.darkTheme = true;
+      }else{
+        this.darkTheme = false;
+      }
+    });
   }
   ngOnInit(): void {
   }
@@ -74,5 +80,13 @@ export class ConfigComponent implements OnInit {
     this.service.NuevoTablero(this.getTituloNuevo).then((data) => {});
     this.showNuevoTablero = false;
     this.mainPage.reset();
+  }
+  public isDarkTheme(checked: boolean): void{
+    if (checked){
+      this.service.ActualizarTemaSeleccionado('dark');
+    }
+    else{
+      this.service.ActualizarTemaSeleccionado('light');
+    }
   }
 }

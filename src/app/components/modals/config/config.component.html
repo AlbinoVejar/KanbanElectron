@@ -9,6 +9,11 @@
         <mat-divider></mat-divider>
     </div>
     <mat-dialog-content class="pure-u-1" [formGroup]="mainPage">
+        <!-- Sile-Toggle del DarkTheme -->
+        <div class="pure-u-1 contentRow">
+            <mat-slide-toggle (change)="isDarkTheme($event.checked)" [checked]="darkTheme">Dark Theme</mat-slide-toggle>
+        </div>
+        <!-- ----- -->
         <div class="pure-u-1 contentRow" *ngIf="!showNuevoTablero">
             <h4 class="title">Tablero Actual: </h4>
             <h4 *ngIf="!showEditTitulo">{{tableroTitulo}}</h4>
