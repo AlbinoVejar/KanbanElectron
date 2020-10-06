@@ -1,27 +1,23 @@
-# KanbanElectron
+# KanbaMe
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
+El proyecto es desarrollado para su uso personal. Además de tener la capicidad de ser multiplataforma.
 
-## Development server
+## Desarrollo
+Se desarrolló utilizando las tecnologías de NodeJs, ElectronJs y Angular
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Screenshots
+![alt text](https://github.com/AlbinoVejar/KanbanElectron/blob/master/assets/Screenshot_20201005_162612.png "Foto 1")
+![alt text](https://github.com/AlbinoVejar/KanbanElectron/blob/master/assets/Screenshot_20201005_162659.png "Foto 2")
 
-## Code scaffolding
+## Instalación
+* Linux
+  * Descomprimir el archivo .ZIP
+  * Ejecutar archivo KanbaMe
+* Windows
+  * Descomprimir el archivo .ZIP
+  * Doble clic en el archivo KanbaMe-setup.exe
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Descargar
+* [Windows](https://github.com/AlbinoVejar/KanbanElectron/releases/download/1.0-beta/MyKanban-beta-windows.zip)
+* [Linux](https://github.com/AlbinoVejar/KanbanElectron/releases/download/1.0-beta/My-Kanban_beta-linux.zip)
+* Mac (pendiente)

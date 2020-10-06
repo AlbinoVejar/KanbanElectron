@@ -1,3 +1,4 @@
+import { ITablero } from './../../../services/interfaces/iTablero';
 import { SeccionesComponent } from './../../secciones/secciones.component';
 import { Usuario } from './../../../services/models/Usuario.model';
 import { MainService } from './../../../services/main.service';
@@ -28,15 +29,16 @@ export class NavbarComponent implements OnInit {
   ) {
     this.service.getTableroSeleccionado().then((data) => {
       this.selectTablero = data;
+      this.getTableros().then(() => {
+        this.getTitulo(this.selectTablero);
+      });
     });
-    this.getTableros();
-    // this.getTitulo(this.selectTablero);
     this.selectTableros = false;
   }
 
   ngOnInit(): void {}
 
-  private async getTableros(){
+  private async getTableros(): Promise<any>{
     const data = await this.service.getAllTableros(1);
     this.tableros = data;
   }

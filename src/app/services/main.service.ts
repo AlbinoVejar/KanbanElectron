@@ -1,4 +1,3 @@
-import { IConfig } from './interfaces/iConfig';
 import { ControlService } from './control.service';
 import { Tarea } from './models/Tarea.model';
 import { Tarjeta } from './models/Tarjeta.model';
@@ -62,34 +61,42 @@ export class MainService {
   public async getAllTableros(idUsuario: number): Promise<any>{
     const tableros: Tablero[] = [];
     const data = await this.service.getTablerosSQL(idUsuario);
-    for (const tablero of data) {
-      tableros.push(Object.assign(new Tablero(), tablero));
+    if (data){
+      for (const tablero of data) {
+        tableros.push(Object.assign(new Tablero(), tablero));
+      }
     }
     return tableros;
   }
   public async getAllSecciones(idTablero: number): Promise<any>{
     const secciones: Seccion[] = [];
     const data = await this.service.getSeccionesSQL(idTablero);
-    for (const seccion of data) {
-      const item: Seccion = Object.assign(new Seccion(), seccion);
-      item.Tarjetas = await this.getAllTarjetas(item.IdSeccion);
-      secciones.push(item);
+    if (data){
+      for (const seccion of data) {
+        const item: Seccion = Object.assign(new Seccion(), seccion);
+        item.Tarjetas = await this.getAllTarjetas(item.IdSeccion);
+        secciones.push(item);
+      }
     }
     return secciones;
   }
   public async getAllTarjetas(idSeccion: number): Promise<any>{
     const tarjetas: Tarjeta[] = [];
     const items = await this.service.getTarjetasSQL(idSeccion);
-    for (const tarjeta of items) {
-      tarjetas.push(Object.assign(new Tarjeta(), tarjeta));
+    if (items){
+      for (const tarjeta of items) {
+        tarjetas.push(Object.assign(new Tarjeta(), tarjeta));
+      }
     }
     return tarjetas;
   }
   public async getAllTareas(idTarjeta: number): Promise<any>{
     const tareas: Tarea[] = [];
     const items = await this.service.getTareasSQL(idTarjeta);
-    for (const tarea of items) {
-      tareas.push(Object.assign(new Tarea(), tarea));
+    if (items){
+      for (const tarea of items) {
+        tareas.push(Object.assign(new Tarea(), tarea));
+      }
     }
     return tareas;
   }

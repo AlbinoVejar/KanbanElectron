@@ -57,10 +57,6 @@ export class SeccionesComponent implements OnInit {
   public cambiarNombre(): void{
     this.showInputName = !this.showInputName;
   }
-  public guardar(): void{
-    // console.log(this.tituloSeccion);
-    // this.mainPage.reset();
-  }
   public nuevaTarjeta(seccion: number): void{
     this.selectSeccion = seccion;
     this.showInputTarjeta = !this.showInputTarjeta;
