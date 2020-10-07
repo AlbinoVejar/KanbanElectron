@@ -1,9 +1,9 @@
 {
-    "name": "kanban-electron",
-    "version": "1.0.0",
+    "name": "KanbaMe",
+    "version": "1.0.1",
     "main": "index.js",
     "build": {
-        "appId": "kanbanelectronv1",
+        "appId": "kanbamev1",
         "asar": true,
         "files": [
             "**/*",
