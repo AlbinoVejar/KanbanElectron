@@ -42,7 +42,7 @@
         <div class="inputNuevaTarea" *ngIf="showNuevaTarea">
             <mat-form-field class="w-80">
                 <mat-label>Añada una nueva tarea</mat-label>
-                <textarea matInput [formControl]="nuevaTarea" (keyup.escape)="controlNuevaTarea()" #Descripcion></textarea>
+                <textarea matInput [formControl]="nuevaTarea" (keyup.enter)="crearTarea()" (keyup.escape)="controlNuevaTarea()" autofocus #Descripcion></textarea>
                 <button type="button" mat-button *ngIf="Descripcion.value" matSuffix mat-icon-button aria-label="Clear" (click)="Descripcion.value=''">
                     <mat-icon>close</mat-icon>
                 </button>
@@ -52,10 +52,6 @@
                 </button>
             </mat-form-field>
         </div>
-        <!-- <div class="pure-u-1-4 contentActions" *ngIf="showNuevaTarea">
-            <button type="button" mat-raised-button color="primary" (click)="crearTarea()">Añadir</button>
-            <button mat-raised-button color="warn" (click)="controlNuevaTarea()">Cancelar</button>
-        </div> -->
         <section class="nuevaTarea">
             <button mat-stroked-button (click)="controlNuevaTarea()" [disabled]="showNuevaTarea">Nueva Tarea
                 <mat-icon aria-hidden="false" aria-label="Agregar nueva tarea">add</mat-icon>
