@@ -5,7 +5,7 @@
                 <mat-checkbox (change)="actualizarEstadoTarea($event.checked)" [checked]="this.tarea.Realiza === 1"></mat-checkbox>
                 <mat-label class="inputTarea" *ngIf="showLabel" (click)="controlDescripcionTarea()">{{tarea.Titulo}}</mat-label>
                 <mat-form-field class="edicionDescripcion" *ngIf="!showLabel">
-                    <textarea matInput [formControl]="nuevaDescripcion" class="inputTarea" placeholder="Nuevo Elemento"></textarea>
+                    <textarea matInput [formControl]="nuevaDescripcion" class="inputTarea" (keyup.enter)="actualizarTarea()" autofocus></textarea>
                     <button mat-stroked-button (click)="actualizarTarea()">Guardar</button>
                     <button mat-icon-button (click)="cancelarEdicion()">
                         <mat-icon>close</mat-icon>
@@ -13,9 +13,9 @@
                 </mat-form-field>
             </div>
             <div class="options">
-                <button mat-icon-button>
+                <!-- <button mat-icon-button>
                     <mat-icon (click)="controlDescripcionTarea()">create</mat-icon>
-                </button>
+                </button> -->
                 <button mat-icon-button>
                     <mat-icon (click)="eliminarTarea()">delete</mat-icon>
                 </button>

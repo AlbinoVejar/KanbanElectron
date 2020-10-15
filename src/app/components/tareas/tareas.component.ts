@@ -23,6 +23,7 @@ export class TareasComponent implements OnInit {
     this.showLabel = true;
     this.nuevaTarea = false;
     this.diasabledButton = false;
+    // this.nuevaDescripcion.setValue(this.tarea.Titulo);
   }
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class TareasComponent implements OnInit {
   }
   public controlDescripcionTarea(): void{
     this.showLabel = !this.showLabel;
+    this.nuevaDescripcion.setValue(this.tarea.Titulo);
   }
   public comenzarEdicion(): void{
     this.controlDescripcionTarea();

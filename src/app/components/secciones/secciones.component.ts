@@ -68,25 +68,21 @@ export class SeccionesComponent implements OnInit {
       this.secciones = data;
     });
   }
-  public guardarTarjeta(idSeccion: number): void{
-    this.secciones = [];
-    this.service.getAllSecciones(this.selectTablero).then((data) => {
-      this.secciones = data;
-    });
-  }
   public NuevaSeccion(): void{
     this.showInputNuevaSeccion = !this.showInputNuevaSeccion;
   }
   public GuardarNuevaSeccion(): void{
-    this.service.NuevaSeccion(this.getTituloSeccion);
+    this.service.NuevaSeccion(this.getTituloSeccion, this.selectTablero).then(() => {
+      this.NuevaSeccion();
+      this.resetSecciones();
+      this.resetForm();
+    });
   }
   public cambiarSecciones(id: number): void{
     this.selectTablero = id;
     this.secciones = [];
     this.service.getAllSecciones(this.selectTablero).then((data) => {
       this.secciones = data;
-      // this.cargarTarjetas().then((data) => {});
-      // this.service.setSelectTablero(this.selectTablero);
     });
   }
   public cargarTarjetas(idSeccion: number): void{
@@ -108,7 +104,7 @@ export class SeccionesComponent implements OnInit {
       this.resetSecciones();
     }
   }
-  public dragTarjeta(event: CdkDragMove<Tarjeta>){
+  public dragTarjeta(event: CdkDragMove<Tarjeta>): void{
     this.selectTarjetaDrag = event.source.data.IdTarjeta;
   }
 }

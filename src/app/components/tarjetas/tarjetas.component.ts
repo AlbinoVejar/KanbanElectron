@@ -17,6 +17,7 @@ export class TarjetasComponent implements OnInit {
   @Input() idSeccion: number;
   showInputTarjeta: boolean;
   showNuevaTarjeta: boolean;
+  overTimerTarjeta: boolean;
   mainPage: FormGroup;
   tituloNuevo = new FormControl('');
   tituloTarjeta = new FormControl('');
@@ -30,6 +31,7 @@ export class TarjetasComponent implements OnInit {
     this.selectTarjeta = 0;
     this.showInputTarjeta = false;
     this.showNuevaTarjeta = false;
+    this.overTimerTarjeta = false;
   }
 
   ngOnInit(): void {
@@ -44,17 +46,30 @@ export class TarjetasComponent implements OnInit {
   }
   public editarTarjeta(): void{
     this.showInputTarjeta = !this.showInputTarjeta;
+    this.tituloNuevo.setValue(this.tarjeta.Titulo);
   }
   public guardarCambios(): void{
     this.service.ActualizarTarjetaTitulo(this.tarjeta.IdTarjeta, this.getTitulo);
     this.resetTarjetas.emit(this.idSeccion);
+    this.tituloNuevo.reset();
   }
   public mostrarDialogo(tarjeta: Tarjeta): void{
-    this.dialog.open(MainComponent, {
-      width: '900px',
-      height: '600px',
-      data: tarjeta
-    });
+    if (this.overTimerTarjeta){
+      this.editarTarjeta();
+    }else {
+      this.dialog.open(MainComponent, {
+        width: '900px',
+        height: '600px',
+        data: tarjeta
+      });
+    }
+  }
+  public overTarjeta(): void{
+    this.overTimerTarjeta = false;
+    let coutdown = setInterval(() => {
+      this.overTimerTarjeta = true;
+      clearInterval(coutdown);
+    }, 2000);
   }
   public mostrarConfirmacion(): void{
     const dialog = this.dialog.open(ConfirmComponent);

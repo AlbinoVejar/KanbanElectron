@@ -97,8 +97,8 @@ export class MainService {
   public async NuevoTablero(nombre: string): Promise<any>{
     return await this.service.insertTableroSQL(nombre, 1);
   }
-  public async NuevaSeccion(titulo: string): Promise<any>{
-    return await this.service.insertSeccionSQL(titulo, this.tableroSeleccionado);
+  public async NuevaSeccion(titulo: string, idTablero: number): Promise<any>{
+    return await this.service.insertSeccionSQL(titulo, idTablero);
   }
   public async NuevaTarjeta(titulo: string, idSeccion: number): Promise<any>{
     return await this.service.insertTarjetaSQL(titulo, idSeccion);

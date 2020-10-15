@@ -3,7 +3,7 @@ import { MainService } from './../../../services/main.service';
 import { Tarjeta } from './../../../services/models/Tarjeta.model';
 import { TarjetasComponent } from './../../tarjetas/tarjetas.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -11,6 +11,7 @@ import { Component, OnInit, Inject } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  @ViewChild ('Descripcion') inputDescripcion: ElementRef;
   tarjeta: Tarjeta;
   descripcion = new FormControl('');
   nuevaTarea = new FormControl('');
@@ -51,12 +52,13 @@ export class MainComponent implements OnInit {
   }
   public controlNuevaTarea(): void{
     this.showNuevaTarea = !this.showNuevaTarea;
+    // this.inputDescripcion.nativeElement.focus();
   }
   public crearTarea(): void{
     this.server.NuevaTarea(this.getNuevaTareaValue, this.tarjeta.IdTarjeta).then(() => {
       this.resetTareas();
-      this.controlNuevaTarea();
       this.nuevaTarea.reset();
+      this.inputDescripcion.nativeElement.focus();
     });
   }
 }

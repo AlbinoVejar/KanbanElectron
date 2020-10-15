@@ -12,3 +12,7 @@
 .secciones {
     display: flex;
 }
+
+.main {
+    overflow: auto;
+}

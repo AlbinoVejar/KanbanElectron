@@ -9,7 +9,7 @@
     </mat-card-content>
     <!-- Botón para agregar nueva tarjeta -->
     <mat-card-actions>
-        <app-seccion-actions (tituloNuevaTarjeta)="guardarTarjeta($event)" [idSeccion]="seccion.IdSeccion"></app-seccion-actions>
+        <app-seccion-actions (tituloNuevaTarjeta)="resetSecciones($event)" [idSeccion]="seccion.IdSeccion"></app-seccion-actions>
     </mat-card-actions>
 </mat-card>
 

@@ -1,14 +1,17 @@
 <mat-card class="tarjeta">
-    <mat-card-content class="headerTarjeta" *ngIf="!showInputTarjeta">
-        <h3 class="margin-null" (click)="mostrarDialogo(tarjeta)">{{tarjeta.Titulo}}</h3>
-        <button mat-icon-button [matMenuTriggerFor]="menuTarjeta" aria-label="Example icon-button with a menu" (click)="selectTarjeta = tarjeta.IdTarjeta">
-            <mat-icon>more_vert</mat-icon>
+    <div class="headerTarjeta" *ngIf="!showInputTarjeta">
+        <div class="divCard" (click)="mostrarDialogo(tarjeta)">
+            <h3 class="margin-null" [ngClass]="{'edit':overTimerTarjeta}" (mouseover)="overTarjeta()">{{tarjeta.Titulo}}</h3>
+        </div>
+        <button mat-icon-button aria-label="Borrar Tarjeta" (click)="mostrarConfirmacion()">
+            <mat-icon>close</mat-icon>
         </button>
-    </mat-card-content>
+    </div>
+
     <mat-card-content *ngIf="showInputTarjeta">
-        <mat-form-field *ngIf="showInputTarjeta">
+        <mat-form-field class="inputsTarjeta" *ngIf="showInputTarjeta">
             <mat-label>{{tarjeta.Titulo}}</mat-label>
-            <input matInput [formControl]="tituloNuevo" placeholder="Nuevo Titulo" (keyup.enter)="guardarCambios()" (keyup.Escape)="editarTarjeta()">
+            <input matInput [formControl]="tituloNuevo" placeholder="Nuevo Titulo" (keyup.enter)="guardarCambios()" (keyup.Escape)="editarTarjeta()" autofocus>
         </mat-form-field>
         <div class="itemsCenter">
             <button mat-flat-button color="primary" (click)="guardarCambios()">Guardar</button>
@@ -18,7 +21,7 @@
 </mat-card>
 
 <mat-menu #menuTarjeta="matMenu" xPosition="after">
-    <button mat-menu-item (click)="editarTarjeta()">
+    <button mat-menu-item>
         Editar
         <mat-icon >create</mat-icon>
     </button>
