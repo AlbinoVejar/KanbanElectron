@@ -1,6 +1,5 @@
 .inputTarea {
     margin-left: 2%;
-    font-size: 150%;
 }
 
 .tarea {
@@ -24,6 +23,7 @@
 .edicionDescripcion {
     width: 90%;
     margin-left: 2%;
+    word-wrap: break-word;
 }
 
 .nuevaTarea {

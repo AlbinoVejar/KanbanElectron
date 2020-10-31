@@ -34,6 +34,7 @@ mt-1 {
     margin-left: 1%;
     margin-bottom: 1%;
     overflow: hidden;
+    word-wrap: break-word;
 }
 
 .header-modal {
